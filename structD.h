@@ -10,10 +10,9 @@ char mat[N][M];
 
 
 typedef struct joueurs_s {
-
+  
   char * nom;
   char * couleur;
-
 
 }joueur ;
 
