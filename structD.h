@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #define N  6
-#define N  7
+#define M  7
 
 
 
