@@ -3,9 +3,9 @@
 #include "structD.h"
 
 
-int statut(int x, mat[N][M]){
+int statut(int x, char mat[N][M]){
 
-  for (int y = M ; (mat[x][y]==("R"||"J")) || (y < 0) ; y--) ; /* on arrive au baout tant que l'emplacement est pris on remonte */
+  for (int y = M ; (mat[x][y]==("R"||"J")) || (y < 0) ; y--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
 
   if (y=>0) {          /* si les coordonnée sur l'axe des y est dans la grille alors on le retourne */
     return y ;
@@ -16,18 +16,18 @@ int statut(int x, mat[N][M]){
 
 }
 
-void inserer(int x, int y, joueur t, mat[N][M]){
+void inserer(int x, int y, joueur t, char mat[N][M]){
 
   if (t.couleur=="rouge") {
-    mat[x][y]=1;
+    mat[x][y]="R";
   }
-  else if (t.couleur=="jauge") {
-    mat[x][y]=2;
+  else if (t.couleur=="jaune") {
+    mat[x][y]="J";
   }
 
 }
 
-int quiGagne(mat[N][M],joueur t){       // fonction qui verifie les pions du joueur pour savoir si il a gagner ou pas
+int quiGagne(char mat[N][M],joueur t){       // fonction qui verifie les pions du joueur pour savoir si il a gagner ou pas
 
 }
 
@@ -36,7 +36,9 @@ int quiGagne(mat[N][M],joueur t){       // fonction qui verifie les pions du jou
 void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 
 int x=0;
-while( quiGagne(mat,j1)==1 || quiGagne(mat,j2)==1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
+
+
+while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
