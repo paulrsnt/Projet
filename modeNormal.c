@@ -29,7 +29,7 @@ int quiGagne(char mat[N][M],joueur j){       // fonction qui verifie les pions d
   int cptC = 0;
 
 
-  if(j.couleur = 'R'){
+  if(j.couleur == 'R'){
       for( i = 0; i < N || cptL<4; i++) {
 
         for(j = 0; j < M || cptL<4; j++) {
@@ -62,17 +62,52 @@ int quiGagne(char mat[N][M],joueur j){       // fonction qui verifie les pions d
         cptC = 0;
       }
 
+      int k=0;
+    
+      for( i = N; i > 0 || cptDG<4; i--) {
 
-      for( i = N; i > 0 || cptD<4; i++) {
+        for(j = M; j > 0 || cptDG<4; j--,i--) {
+          
+          if(mat[i][j] == 'R'){
 
-        for(j = M; j > 0 || cptD<4; j++) {
+            cptDG ++;
+          }
 
-          if (mat[i][j] == 'R') {
-
+          if (mat[i][j] == 'J') {
+            cptDG = 0;
           }
 
         }
+        k++;
+        i=N-k;
+        cptDG = 0;
+      }
+   
+    
+    
+    
+    
+    
+    
+      k=0;
+    
+      for( i = N; i > 0 || cptDD<4; i--) {
 
+        for(j = 0; j < M || cptDD<4; j++,i--) {
+          
+          if(mat[i][j] == 'R'){
+
+            cptDD ++;
+          }
+
+          if (mat[i][j] == 'J') {
+            cptDD = 0;
+          }
+
+        }
+        k++;
+        i=N-k;
+        cptDG = 0;
       }
 
 
