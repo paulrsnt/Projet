@@ -2,16 +2,34 @@
 #include <stdlib.h>
 #include "structD.h"
 
-int statut(int x, char mat[N][M],piece p){
+int statut(int x, char mat[N][M], piece p){
 
-  for (int y = M ; (mat[x][y]==("R"||"J")) || (y < 0) ; y--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+	int y=0;
+   /* on arrive au bout tant que l'emplacement est pris on remonte */
 
-  if (y=>0) {          /* si les coordonnée sur l'axe des y est dans la grille alors on le retourne */
-    return y ;
-  }
-  else{               /* sinon on retourne -1 */
-    return -1;
-  }
+	if(piece bloquante){
+		if(mat[x][y]!=(" ")){
+			return -1;
+		}
+		else{
+			for (y=0 ; (mat[x][y]!=(" ")) || (y <= M) ; y++) ;
+  			return y;
+		}
+  		
+  	}
+  	if else(piece pleine){
+  		y=0;
+  		if((mat[x][y]==(" "))||(mat[x][y]==("")))
+  		for( ; mat[x][y]= )
+  		return y;
+
+  	}              /* sinon on retourne -1 */
+    
+  	if else(piece creuse){
+
+  		return y;
+
+  	}
 
 }
 
