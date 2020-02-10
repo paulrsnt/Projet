@@ -7,7 +7,7 @@ int statut(int x, char mat[N][M], piece p){
 	int y=0;
    /* on arrive au bout tant que l'emplacement est pris on remonte */
 
-	if(piece bloquante){
+	if(piece p==1){
 		if(mat[x][y]!=(" ")){
 			return -1;
 		}
@@ -17,7 +17,7 @@ int statut(int x, char mat[N][M], piece p){
 		}
   		
   	}
-  	if else(piece pleine){
+  	if else(piece p==2){
   		y=0;
   		if((mat[x][y]==(" "))||(mat[x][y]==("")))
   		for( ; mat[x][y]= )
@@ -25,7 +25,7 @@ int statut(int x, char mat[N][M], piece p){
 
   	}              /* sinon on retourne -1 */
     
-  	if else(piece creuse){
+  	if else(piece p==3){
 
   		return y;
 
@@ -36,29 +36,128 @@ int statut(int x, char mat[N][M], piece p){
 void inserer(int x, int y, joueur t, char mat[N][M], piece p){
 
   if (t.couleur=="rouge") {
-	if(piece p=1){
+	if(piece p==1){
 		mat[x][y]="RB"; /*Rouge bloquante*/
 	}
-	if(piece p=2){
+	if(piece p==2){
 		mat[x][y]="RC"; /*Rouge creuse*/
 	}
-	if(piece p=3){
+	if(piece p==3){
 		mat[x][y]="RP"; /*Rouge pleine*/
   }
   if (t.couleur=="jaune") {
-	if(piece p=1){
+	if(piece p==1){
 		mat[x][y]="JB";
 	}
-	if(piece p=2){
+	if(piece p==2){
 		mat[x][y]="JC";
 	}
-	if(piece p=3){
+	if(piece p==3){
 		mat[x][y]="JP";
   }
 
 }
 
-int quiGagne(char mat[N][M],joueur t){       // fonction qui verifie les pions du joueur pour savoir si il a gagner ou pas
+int quiGagne(char mat[N][M],joueur j){       // fonction qui verifie les pions du joueur pour savoir si il a gagner ou pas
+  int i,j=0;
+  int cptL = 0;
+  int cptD = 0;
+  int cptC = 0;
+
+
+  if(j.couleur == 'R'){
+      for( i = 0; i < N || cptL<4; i++) {
+
+        for(j = 0; j < M || cptL<4; j++) {
+
+          if(mat[i][j] == 'R'){
+
+            cptL ++;
+          }
+
+          if (mat[i][j] == 'J') {
+            cptL = 0;
+          }
+        }
+        cptL = 0;
+      }
+
+      for( i = 0; i < M || cptC<4; i++) {
+
+        for(j = 0; j < N || cptC<4; j++) {
+
+          if(mat[i][j] == 'R'){
+
+            cptC ++;
+          }
+
+          if (mat[i][j] == 'J') {
+            cptC = 0;
+          }
+        }
+        cptC = 0;
+      }
+
+      int k=0;
+    
+      for( i = N; i > 0 || cptDG<4; i--) {
+
+        for(j = M; j > 0 || cptDG<4; j--,i--) {
+          
+          if(mat[i][j] == 'R'){
+
+            cptDG ++;
+          }
+
+          if (mat[i][j] == 'J') {
+            cptDG = 0;
+          }
+
+        }
+        k++;
+        i=N-k;
+        cptDG = 0;
+      }
+   
+    
+    
+    
+    
+    
+    
+      k=0;
+    
+      for( i = N; i > 0 || cptDD<4; i--) {
+
+        for(j = 0; j < M || cptDD<4; j++,i--) {
+          
+          if(mat[i][j] == 'R'){
+
+            cptDD ++;
+          }
+
+          if (mat[i][j] == 'J') {
+            cptDD = 0;
+          }
+
+        }
+        k++;
+        i=N-k;
+        cptDG = 0;
+      }
+
+
+
+
+
+
+
+
+  }
+
+
+
+
 
 }
 
