@@ -12,21 +12,33 @@ int statut(int x, char mat[N][M], piece p){
 			return -1;
 		}
 		else{
-			for (y=0 ; (mat[x][y]!=(" ")) || (y <= M) ; y++) ;
+			for (y=M ; (mat[x][y]!=(" ")) || (y > 0) ; y--) ;
   			return y;
 		}
   		
   	}
   	if else(piece p==2){
   		y=0;
-  		if((mat[x][y]==(" "))||(mat[x][y]==("")))
-  		for( ; mat[x][y]= )
+		if(mat[x][y]!=(" ")||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
+			return -1;
+		}
+		else {
+			for(y=M ; ( mat[x][y]!=(" ") || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
+			return y;
+		}
   		return y;
 
   	}              /* sinon on retourne -1 */
     
   	if else(piece p==3){
-
+  		y=0;
+		if(mat[x][y]!=(" ")||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
+			return -1;
+		}
+		else {
+			for(y=M ; ( mat[x][y]!=(" ") || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
+			return y;
+		}
   		return y;
 
   	}
