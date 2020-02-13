@@ -17,7 +17,7 @@ int statut(int y, char mat[N][M], piece p){
 		}
   		
   	}
-  	if else( p==2){
+  	else if( p==2){
   		y=0;
 		if(mat[x][y]!=('o')||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
 			return -1;
@@ -30,7 +30,7 @@ int statut(int y, char mat[N][M], piece p){
 
   	}              /* sinon on retourne -1 */
     
-  	if else( p==3){
+  	else if( p==3){
   		y=0;
 		if(mat[x][y]!=('o')||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
 			return -1;
@@ -331,7 +331,7 @@ j2.couleur="jaune";
 j3.couleur="rouge";
 j4.couleur="jaune";
 
-while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiGagne(mat,j4)!=1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
+while( quigagne(mat)!=1 || quigagne(mat)!=2){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
@@ -349,7 +349,7 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
 
   inserer(x,statut(x,mat,P1),j1,mat,P1);                          //on insere la piece
 
-  if(quiGagne(mat,j1)==0){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+  if(quigagne(mat)==0){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
     // tour du deuxieme joueur de jouer
     x=0;
@@ -405,12 +405,12 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
 
 }
 
-if (quiGagne(mat)==1) {
+if (quigagne(mat)==1) {
   printf("Le joueur 1 et 3 ont gagnés !!!! \n", );
 }
 
 
-else if (quiGagne(mat)==1) {
+else if (quigagne(mat)==1) {
   printf("Le joueur 2 et 4 ont gagnés !!!! \n", );
 }
 
