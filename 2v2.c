@@ -7,6 +7,10 @@ int statut2v2(int y, char mat[N][M], piece p){
 	int x=0;
    /* on arrive au bout tant que l'emplacement est pris on remonte */
 
+/*	 for (x = N ;(x < 0 || (mat[x][y]=="RP"||mat[x][y]=="RC"||mat[x][y]=="RB"||mat[x][y]=="JC"||mat[x][y]=="JB"||mat[x][y]=="JP")); x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte return x ;
+*/
+
+
 	if(p==1){
 		if(mat[x][y]!=('o')){
 			return -1;
@@ -15,7 +19,7 @@ int statut2v2(int y, char mat[N][M], piece p){
 			for (y=M ; (mat[x][y]!=('o')) || (y > 0) ; y--) ;
   			return y;
 		}
-  		
+
   	}
   	else if( p==2){
   		y=0;
@@ -29,7 +33,7 @@ int statut2v2(int y, char mat[N][M], piece p){
   		return y;
 
   	}              /* sinon on retourne -1 */
-    
+
   	else if( p==3){
   		y=0;
 		if(mat[x][y]!=('o')||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
@@ -37,13 +41,40 @@ int statut2v2(int y, char mat[N][M], piece p){
 		}
 		else {
 			for(y=M ; ( mat[x][y]!=('o') || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
-			return y;
+			return x;
 		}
-  		return y;
+  		return x;
 
   	}
 
 }
+
+
+void initMatrice2v2(char mat[N][M]){
+	int i,j;
+
+	for(i=1 ; i< N ; i++){
+		for(j=0 ; j < M ; j++){
+			mat[i][j] = 'o';
+		}
+	}
+  for(j=0 ; j < M ; j++){
+      mat[0][j]= '*';
+    }
+
+}
+
+void afficher_mat2v2(char mat[N][M]){
+/*fonction qui permet de afficher la matrice*/
+    int i, j;
+    for(i=0;i<N;i++){       /*parcour de la ligne*/
+        for(j=0;j<M;j++){   /*parcour du colonnes*/
+            printf("%c | ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 
 void inserer2v2(int x, int y, joueur t, char mat[N][M], piece p){
 
@@ -56,8 +87,8 @@ void inserer2v2(int x, int y, joueur t, char mat[N][M], piece p){
 	}
 	if(p==3){
 		mat[x][y]="RP"; /*Rouge pleine*/
-	}
   }
+}
   if (t.couleur=="jaune") {
 	if(p==1){
 		mat[x][y]="JB";
@@ -67,9 +98,10 @@ void inserer2v2(int x, int y, joueur t, char mat[N][M], piece p){
 	}
 	if(p==3){
 		mat[x][y]="JP";
-  	}
-
   }
+
+}
+
 }
 
 int gagnant_ligne2v2(char mat[N][M]){
@@ -272,7 +304,6 @@ int gagnant_diagonale2v2(char mat[N][M]){
 }
 
 
-
 int quigagne2v2(char mat[N][M]){
 //fonction permettant de savoir qui a gagné en ayant 4 piece alignées.
 
@@ -328,6 +359,7 @@ void Jouer2vs2(char mat[N][M], joueur j1, joueur j2, joueur j3, joueur j4, piece
 int x=0;
 int TypePiece=0;
 
+
 j1.couleur="rouge";
 j2.couleur="jaune";
 j3.couleur="rouge";
@@ -336,84 +368,86 @@ j4.couleur="jaune";
 while( quigagne2v2(mat)!=1 || quigagne2v2(mat)!=2){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
-
+	initMatrice(mat);
+	afficher_mat(mat);
   do{
-    printf("Joueur 1 (equipe rouge) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+    printf("Joueur 1 (equipe rouge ):Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
     scanf("%d",&TypePiece);
-    printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
+    printf("Joueur 1 (equipe rouge ):Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
     scanf("%d",&x);
 
   if (statut2v2(x,mat,P1)==-1) {
-    printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
+    printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",x);
   }
 
-  }while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+}while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
   inserer2v2(x,statut2v2(x,mat,P1),j1,mat,P1);                          //on insere la piece
-
+	afficher_mat(mat);
   if(quigagne2v2(mat)==0){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
     // tour du deuxieme joueur de jouer
     x=0;
 
     do{
-      printf("Joueur 2 (equipe jaune) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+      printf("Joueur 2 (equipe jaune ):Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
       scanf("%d",&TypePiece);
-      printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
+      printf("Joueur2 (equipe jaune ): Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x);
 
     if (statut2v2(x,mat,P1)==-1) {
-      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
+      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",x);
     }
 
-    }while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+	}while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
     inserer2v2(x,statut2v2(x,mat,P1),j1,mat,P1);
+			afficher_mat(mat);
   }
 
     x=0;
 
     do{
-      printf("Joueur 3 (equipe rouge) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+      printf("Joueur 3 (equipe rouge ):Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
       scanf("%d",&TypePiece);
-      printf("Joueur3 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
+      printf("Joueur3 (equipe rouge ): Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x);
 
     if (statut2v2(x,mat,P1)==-1) {
-      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
+      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",x);
     }
 
-    }while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+	}while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
     inserer2v2(x,statut2v2(x,mat,P1),j1,mat,P1);
-  }
+			afficher_mat(mat);
+
 
     x=0;
 
     do{
-      printf("Joueur 4 (equipe jaune) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+      printf("Joueur 4 (equipe jaune ):Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
       scanf("%d",&TypePiece);
-      printf("Joueur4 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
-      scanf("%d",&x); 
+      printf("Joueur4 (equipe jaune ): Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
+      scanf("%d",&x);
 
     if (statut2v2(x,mat,P1)==-1) {
-      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
+      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",x);
     }
 
-    }while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+	}while ((x<0||x>6) || statut2v2(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
     inserer2v2(x,statut2v2(x,mat,P1),j1,mat,P1);
-  }
-
+		afficher_mat(mat);
 }
+
 
 if (quigagne2v2(mat)==1) {
-  printf("Le joueur 1 et 3 ont gagnés !!!! \n", );
+  printf("Le joueur 1 et 3 ont gagnés !!!! \n" );
 }
 
-
-else if (quigagne2v2(mat)==1) {
-  printf("Le joueur 2 et 4 ont gagnés !!!! \n", );
+else if (quigagne2v2(mat)==2) {
+  printf("Le joueur 2 et 4 ont gagnés !!!! \n");
 }
 
 

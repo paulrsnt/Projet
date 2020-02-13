@@ -52,7 +52,9 @@ while(x!=3){
 
   }
   else if (x==2) {
-    printf("Jouer2vs2 en cours.... \n\n\n");
+    joueur j3,j4;
+    piece p;
+    Jouer2vs2(mat,j1,j2,j3,j4,p);
   }
   else if (x==3) {
     return 0;
