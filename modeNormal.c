@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N  6
+#define N  7
 #define M  7
 
 
@@ -19,7 +19,7 @@ typedef struct joueurs_s {
 int statut(int y, char mat[N][M]){
   int x;
 
-  for (x = N-1 ; (x > 0 || (mat[x][y]=='R'||mat[x][y]=='J' )) ; x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+  for (x = N-1 ;(x < 0 || (mat[x][y]=='R'||mat[x][y]=='J' )); x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
 
     return x ;
 
@@ -28,11 +28,15 @@ int statut(int y, char mat[N][M]){
 void initMatrice(char mat[N][M]){
 	int i,j;
 
-	for(int i=0 ; i< N ; i++){
-		for(int j=0 ; j < M ; j++){
+	for(i=1 ; i< N ; i++){
+		for(j=0 ; j < M ; j++){
 			mat[i][j] = 'o';
 		}
 	}
+  for(j=0 ; j < M ; j++){
+      mat[0][j]= '*';
+    }
+
 }
 
 void afficher_mat(char mat[N][M]){
@@ -49,10 +53,10 @@ void afficher_mat(char mat[N][M]){
 void inserer(int y, int x, joueur t, char mat[N][M]){
 
   if (t.couleur=="rouge") {
-    mat[x][y-1]='R';
+    mat[x][y]='R';
   }
   else if (t.couleur=="jaune") {
-    mat[x][y-1]='J';
+    mat[x][y]='J';
   }
 
 }
@@ -321,15 +325,15 @@ while( quigagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
 
   do{
 
-    printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
+    printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");
     scanf("%i",&y);
 
-  if (statut(y,mat)==-1) {
-    printf("Erreur sur les coordonnée des y : la colonne %ls est rempli essayer une autre \n",&y);
+  if (statut(y-1,mat)==0) {
+    printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n\n",y);
   }
 
-}while ((y<0||y>6) || statut(y,mat)==-1);
-
+}while ((y<1||y>7) || statut(y-1,mat)==0);
+  y--;
   inserer(y,statut(y,mat),j1,mat);                          //on insere la piece
 
   afficher_mat(mat);
@@ -341,15 +345,15 @@ while( quigagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
 
     do{
 
-      printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
+      printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");    //rajouter cas y n'est pas un chiffre
       scanf("%i",&y);
 
-    if (statut(y,mat)==-1) {
-      printf("Erreur sur les coordonnée des y : la colonne %ls est rempli essayer une autre \n",&y);
+    if (statut(y-1,mat)==0) {
+      printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n\n",y);
     }
 
-  }while ((y<0||y>6) || statut(y,mat)==-1);
-
+  }while ((y<1||y>7) || statut(y-1,mat)==0);
+    y--;
     inserer(y,statut(y,mat),j2,mat);
     afficher_mat(mat);
   }
@@ -374,3 +378,4 @@ joueur j1,j2;
 JouerNormal1vs1(mat,j1,j2);
 
 }
+
