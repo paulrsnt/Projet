@@ -25,6 +25,26 @@ int statut(int x, char mat[N][M]){
 
 }
 
+void initMatrice(int char[N][M]){
+	int i,j;
+
+	for(int i=0 ; i< N ; i++){
+		for(int j=0 ; j < N ; j++){
+			mat[i][j] = ' ';
+		}
+	}
+  
+void afficher_mat(char mat[N][M]){
+/*fonction qui permet de afficher la matrice*/
+    int i, j;
+    for(i=0;i<N;i++){       /*parcour de la ligne*/
+        for(j=0;j<M;j++){   /*parcour du colonnes*/
+            printf("%c | ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 void inserer(int x, int y, joueur t, char mat[N][M]){
 
   if (t.couleur=="rouge") {
@@ -248,11 +268,11 @@ void quigagne(char mat[N][M]){
 
     if(lig == 1)
     {
-        printf("Le joueur possédant la couleur rouge à gagné avec un alignement en ligne\n");
+        return 1;
     }
     else if(lig == 2)
     {
-        printf("Le joueur possédant la couleur jaune à gagné avec un alignement en ligne \n");
+          return 2;
     }
     else
     {
@@ -260,11 +280,11 @@ void quigagne(char mat[N][M]){
 
         if(col == 1)
         {
-            printf("Le joueur possédant la couleur rouge à gagné avec un alignement en colonne \n");
+            return 1;
         }
         else if(col == 2)
         {
-            printf("Le joueur possédant la couleur jaune à gagné avec un alignement en colonne \n");
+            return 2;
         }
         else
         {
@@ -272,15 +292,15 @@ void quigagne(char mat[N][M]){
 
             if(diag == 1)
             {
-                printf("Le joueur possédant la couleur rouge à gagné avec un alignement en diagonale \n");
+                return 1;
             }
             else if(diag == 2)
             {
-                printf("Le joueur possédant la couleur jaune à gagné avec un alignement en diagonale \n");
+                return 2;
             }
             else
             {
-                printf("Il y a aucun gagnant dans cette partie !!!\n");
+                return 0;
             }
         }
     }
@@ -290,9 +310,10 @@ void quigagne(char mat[N][M]){
 void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 
 int x=0;
-
-
-while( quiGagne(mat)!=1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
+initMatrice(mat);
+afficher_mat(mat);
+  
+while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
@@ -308,8 +329,10 @@ while( quiGagne(mat)!=1 ){        // tant qu'il n'y a pas de gangnant on continu
 }while ((x<0||x>6) || statut(x,mat)==-1);
 
   inserer(x,statut(x,mat),j1,mat);                          //on insere la piece
-
-  if(quiGagne(mat,j1)==0){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+  
+  afficher_mat(mat);
+  
+  if(quiGagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
     // tour du deuxieme joueur de jouer
     x=0;
@@ -330,14 +353,21 @@ while( quiGagne(mat)!=1 ){        // tant qu'il n'y a pas de gangnant on continu
 
 }
 
-quiGagne(mat);
+if(quiGagne(mat)==1){
+  printf("le joueur qui a les rouges a gagné ");
+}
+else if(quiGagne(mat)==2){
+  printf("le joueur qui a les jaunes a gagné ");
+}
 
 }
 
 
 
 int main(){
+  
 joueur j1,j2;
+  
 JouerNormal1vs1(mat,j1,j2);
 
 }
