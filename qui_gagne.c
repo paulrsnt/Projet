@@ -222,11 +222,11 @@ void quigagne(char mat[N][M]){
 
     if(lig == 1)
     {
-        printf("Le joueur possédant la couleur rouge à gagné avec un alignement en ligne\n");
+        return 1;
     }
     else if(lig == 2)
     {
-        printf("Le joueur possédant la couleur jaune à gagné avec un alignement en ligne \n");
+        return 2;
     }
     else
     {
@@ -234,11 +234,11 @@ void quigagne(char mat[N][M]){
 
         if(col == 1)
         {
-            printf("Le joueur possédant la couleur rouge à gagné avec un alignement en colonne \n");
+            return 1;
         }
         else if(col == 2)
         {
-            printf("Le joueur possédant la couleur jaune à gagné avec un alignement en colonne \n");
+            return 2;
         }
         else
         {
@@ -246,15 +246,15 @@ void quigagne(char mat[N][M]){
 
             if(diag == 1)
             {
-                printf("Le joueur possédant la couleur rouge à gagné avec un alignement en diagonale \n");
+                return 1;
             }
             else if(diag == 2)
             {
-                printf("Le joueur possédant la couleur jaune à gagné avec un alignement en diagonale \n");
+                return 2;
             }
             else
             {
-                printf("Il y a aucun gagnant dans cette partie !!!\n");
+                return 0;
             }
         }
     }
