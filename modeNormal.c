@@ -29,7 +29,7 @@ void initMatrice(char mat[N][M]){
 	int i,j;
 
 	for(int i=0 ; i< N ; i++){
-		for(int j=0 ; j < N ; j++){
+		for(int j=0 ; j < M ; j++){
 			mat[i][j] = 'o';
 		}
 	}
@@ -315,7 +315,7 @@ initMatrice(mat);
 afficher_mat(mat);
 j1.couleur="rouge";
 j2.couleur="jaune";
-while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
+while( quigagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
@@ -334,7 +334,7 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
   
   afficher_mat(mat);
   
-  if(quiGagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+  if(quigagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
     // tour du deuxieme joueur de jouer
     x=0;
@@ -356,10 +356,10 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
 
 }
 
-if(quiGagne(mat)==1){
+if(quigagne(mat)==1){
   printf("le joueur qui a les rouges a gagné ");
 }
-else if(quiGagne(mat)==2){
+else if(quigagne(mat)==2){
   printf("le joueur qui a les jaunes a gagné ");
 }
 
