@@ -56,6 +56,7 @@ void inserer2v2(int x, int y, joueur t, char mat[N][M], piece p){
 	}
 	if(p==3){
 		mat[x][y]="RP"; /*Rouge pleine*/
+	}
   }
   if (t.couleur=="jaune") {
 	if(p==1){
@@ -66,8 +67,9 @@ void inserer2v2(int x, int y, joueur t, char mat[N][M], piece p){
 	}
 	if(p==3){
 		mat[x][y]="JP";
-  }
+  	}
 
+  }
 }
 
 int gagnant_ligne2v2(char mat[N][M]){
