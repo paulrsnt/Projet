@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include "structD.h"
 
-int statut(int x, char mat[N][M], piece p){
+int statut(int y, char mat[N][M], piece p){
 
-	int y=0;
+	int x=0;
    /* on arrive au bout tant que l'emplacement est pris on remonte */
 
 	if(piece p==1){
-		if(mat[x][y]!=(" ")){
+		if(mat[x][y]!=("o")){
 			return -1;
 		}
 		else{
@@ -19,11 +19,11 @@ int statut(int x, char mat[N][M], piece p){
   	}
   	if else(piece p==2){
   		y=0;
-		if(mat[x][y]!=(" ")||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
+		if(mat[x][y]!=("o")||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
 			return -1;
 		}
 		else {
-			for(y=M ; ( mat[x][y]!=(" ") || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
+			for(y=M ; ( mat[x][y]!=("o") || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
 			return y;
 		}
   		return y;
@@ -32,11 +32,11 @@ int statut(int x, char mat[N][M], piece p){
     
   	if else(piece p==3){
   		y=0;
-		if(mat[x][y]!=(" ")||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
+		if(mat[x][y]!=("o")||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
 			return -1;
 		}
 		else {
-			for(y=M ; ( mat[x][y]!=(" ") || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
+			for(y=M ; ( mat[x][y]!=("o") || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
 			return y;
 		}
   		return y;
@@ -70,109 +70,255 @@ void inserer(int x, int y, joueur t, char mat[N][M], piece p){
 
 }
 
-int quiGagne(char mat[N][M],joueur j){       // fonction qui verifie les pions du joueur pour savoir si il a gagner ou pas
-  int i,j=0;
-  int cptL = 0;
-  int cptD = 0;
-  int cptC = 0;
+int gagnant_ligne(char mat[N][M]){
+    //fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu
+    int i, j;
+    for (i = 0; i < N; i++)
+    {
+        for(j = 0; j < M; j++)
+        {
+            //returne 1 si le joueur rouge a gagneé
+            if(mat[i][j] == "RC" || mat[i][j] == "RP" || mat[i][j] == "RB" )
+            {
+                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j]== mat[i][j+2]))
+                {
+                    return 1;
+                }
+                else if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
+                {
+                    return 1;
+                }
+                else if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
+                {
+                    return 1;
+                }
+                else if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
+                {
+                    return 1;
+                }
+
+            }
+            //returne 2 si le joueur jaune a gagneé
+            if(mat[i][j] == "JC" || mat[i][j] == "JP" || mat[i][j] == "JB")
+            {
+                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
+                {
+                    return 2;
+                }
 
 
-  if(j.couleur == 'R'){
-      for( i = 0; i < N || cptL<4; i++) {
-
-        for(j = 0; j < M || cptL<4; j++) {
-
-          if(mat[i][j] == 'R'){
-
-            cptL ++;
-          }
-
-          if (mat[i][j] == 'J') {
-            cptL = 0;
-          }
-        }
-        cptL = 0;
-      }
-
-      for( i = 0; i < M || cptC<4; i++) {
-
-        for(j = 0; j < N || cptC<4; j++) {
-
-          if(mat[i][j] == 'R'){
-
-            cptC ++;
-          }
-
-          if (mat[i][j] == 'J') {
-            cptC = 0;
-          }
-        }
-        cptC = 0;
-      }
-
-      int k=0;
-    
-      for( i = N; i > 0 || cptDG<4; i--) {
-
-        for(j = M; j > 0 || cptDG<4; j--,i--) {
-          
-          if(mat[i][j] == 'R'){
-
-            cptDG ++;
-          }
-
-          if (mat[i][j] == 'J') {
-            cptDG = 0;
-          }
+            }
 
         }
-        k++;
-        i=N-k;
-        cptDG = 0;
-      }
-   
-    
-    
-    
-    
-    
-    
-      k=0;
-    
-      for( i = N; i > 0 || cptDD<4; i--) {
-
-        for(j = 0; j < M || cptDD<4; j++,i--) {
-          
-          if(mat[i][j] == 'R'){
-
-            cptDD ++;
-          }
-
-          if (mat[i][j] == 'J') {
-            cptDD = 0;
-          }
-
-        }
-        k++;
-        i=N-k;
-        cptDG = 0;
-      }
-
-
-
-
-
-
-
-
-  }
-
-
-
-
-
+    }
+    return 0;
 }
 
+
+int gagnant_colonne(char mat[N][M]){
+//fonction permettant de voir si il y a un gagnant sur les colonnes du plateau de jeu
+    int i, j;
+
+    for (i = 0; i < N; i++)
+    {
+        for(j = 0; j < M; j++)
+        {
+
+            //returne 1 si le joueur rouge a gagneé
+             if(mat[i][j] == "RC" || mat[i][j] == "RP" || mat[i][j] == "RB" )
+            {
+                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]))
+                {
+                     return 1;
+                }
+                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
+                {
+                    return 1;
+                }
+            }
+            //returne 2 si le joueur jaune a gagneé
+            if(mat[i][j] == "JC" || mat[i][j] == "JP" || mat[i][j] == "JB")
+            {
+                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
+                {
+                    return 2;
+                }
+            }
+
+        }
+    }
+    return 0;
+}
+
+
+int gagnant_diagonale(char mat[N][M]){
+//fonction verifiant si il y a un gagnant sur une diagonale du plateau de jeu
+    int i, j;
+    for (i = 0; i < N; i++)
+    {
+        for(j = 0; j < M; j++)
+        {
+            //returne 1 si le joueur rouge a gagné
+            if(mat[i][j] == "RC" || mat[i][j] == "RP" || mat[i][j] == "RB")
+            {
+                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
+                {
+                    return 1;
+                }
+                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
+                {
+                    return 1;
+                }
+
+            }
+            //returne 2 si le joueur jaune a gagné
+            if(mat[i][j] == "JC" || mat[i][j] == "JP" || mat[i][j] == "JB")
+            {
+                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
+                {
+                    return 2;
+                }
+                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
+                {
+                    return 2;
+                }
+            }
+
+        }
+    }
+    return 0;
+}
+
+
+
+void quigagne(char mat[N][M]){
+//fonction permettant de savoir qui a gagné en ayant 4 piece alignées.
+
+    int lig ;
+    int col;
+    int diag;
+
+    lig = gagnant_ligne(mat);
+
+    if(lig == 1)
+    {
+        return 1;
+    }
+    else if(lig == 2)
+    {
+        return 2;
+    }
+    else
+    {
+        col = gagnant_colonne(mat);
+
+        if(col == 1)
+        {
+            return 1;
+        }
+        else if(col == 2)
+        {
+            return 2;
+        }
+        else
+        {
+            diag = gagnant_diagonale(mat);
+
+            if(diag == 1)
+            {
+                return 1;
+            }
+            else if(diag == 2)
+            {
+                return 2;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
 
 
 void Jouer2vs2(char mat[N][M], joueur j1, joueur j2, joueur j3, joueur j4, piece P1){
