@@ -19,7 +19,7 @@ typedef struct joueurs_s {
 int statut(int y, char mat[N][M]){
   int x;
 
-  for (x = M ; (mat[x][y]==('R'||'J')) || (x > 0) ; x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+  for (x = 0 ; (mat[x][y]==('R'||'J')) || (x < M) ; x++) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
 
     return x ;
 
@@ -29,7 +29,7 @@ void initMatrice(char mat[N][M]){
 	int i,j;
 
 	for(int i=0 ; i< N ; i++){
-		for(int j=0 ; j < N ; j++){
+		for(int j=0 ; j < M ; j++){
 			mat[i][j] = 'o';
 		}
 	}
