@@ -30,7 +30,7 @@ void initMatrice(char mat[N][M]){
 
 	for(int i=0 ; i< N ; i++){
 		for(int j=0 ; j < N ; j++){
-			mat[i][j] = ' ';
+			mat[i][j] = 'o';
 		}
 	}
 }
@@ -313,7 +313,8 @@ void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 int x=0;
 initMatrice(mat);
 afficher_mat(mat);
-  
+j1.couleur="rouge";
+j2.couleur="jaune";
 while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
@@ -350,6 +351,7 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
   }while ((x<0||x>6) || statut(x,mat)==-1);
 
     inserer(x,statut(x,mat),j2,mat);
+    afficher_mat(mat);
   }
 
 }
