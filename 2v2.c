@@ -7,36 +7,36 @@ int statut(int y, char mat[N][M], piece p){
 	int x=0;
    /* on arrive au bout tant que l'emplacement est pris on remonte */
 
-	if(piece p==1){
-		if(mat[x][y]!=("o")){
+	if(p==1){
+		if(mat[x][y]!=('o')){
 			return -1;
 		}
 		else{
-			for (y=M ; (mat[x][y]!=(" ")) || (y > 0) ; y--) ;
+			for (y=M ; (mat[x][y]!=('o')) || (y > 0) ; y--) ;
   			return y;
 		}
   		
   	}
-  	if else(piece p==2){
+  	if else( p==2){
   		y=0;
-		if(mat[x][y]!=("o")||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
+		if(mat[x][y]!=('o')||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
 			return -1;
 		}
 		else {
-			for(y=M ; ( mat[x][y]!=("o") || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
+			for(y=M ; ( mat[x][y]!=('o') || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
 			return y;
 		}
   		return y;
 
   	}              /* sinon on retourne -1 */
     
-  	if else(piece p==3){
+  	if else( p==3){
   		y=0;
-		if(mat[x][y]!=("o")||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
+		if(mat[x][y]!=('o')||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
 			return -1;
 		}
 		else {
-			for(y=M ; ( mat[x][y]!=("o") || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
+			for(y=M ; ( mat[x][y]!=('o') || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
 			return y;
 		}
   		return y;
@@ -48,23 +48,23 @@ int statut(int y, char mat[N][M], piece p){
 void inserer(int x, int y, joueur t, char mat[N][M], piece p){
 
   if (t.couleur=="rouge") {
-	if(piece p==1){
+	if( p==1){
 		mat[x][y]="RB"; /*Rouge bloquante*/
 	}
-	if(piece p==2){
+	if(p==2){
 		mat[x][y]="RC"; /*Rouge creuse*/
 	}
-	if(piece p==3){
+	if(p==3){
 		mat[x][y]="RP"; /*Rouge pleine*/
   }
   if (t.couleur=="jaune") {
-	if(piece p==1){
+	if(p==1){
 		mat[x][y]="JB";
 	}
-	if(piece p==2){
+	if(p==2){
 		mat[x][y]="JC";
 	}
-	if(piece p==3){
+	if(p==3){
 		mat[x][y]="JP";
   }
 
