@@ -10,7 +10,7 @@ char mat[N][M];
 
 
 typedef struct joueurs_s {
-  
+
   char * nom;
   char * couleur;
 
@@ -19,7 +19,7 @@ typedef struct joueurs_s {
 int statut(int y, char mat[N][M]){
   int x;
 
-  for (x = M-1 ; (((mat[x][y]==('R'))||(mat[x][y]==('J'))) || (x < 0) ; x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+  for (x = N-1 ; (mat[x][y]=='R'||mat[x][y]=='J' )|| x < 0 ; x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
 
     return x ;
 
@@ -34,7 +34,7 @@ void initMatrice(char mat[N][M]){
 		}
 	}
 }
-  
+
 void afficher_mat(char mat[N][M]){
 /*fonction qui permet de afficher la matrice*/
     int i, j;
@@ -49,10 +49,10 @@ void afficher_mat(char mat[N][M]){
 void inserer(int y, int x, joueur t, char mat[N][M]){
 
   if (t.couleur=="rouge") {
-    mat[x][y]='R';
+    mat[x][y-1]='R';
   }
   else if (t.couleur=="jaune") {
-    mat[x][y]='J';
+    mat[x][y-1]='J';
   }
 
 }
@@ -315,7 +315,7 @@ initMatrice(mat);
 afficher_mat(mat);
 j1.couleur="rouge";
 j2.couleur="jaune";
-while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
+while( quigagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
@@ -331,10 +331,10 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
 }while ((y<0||y>6) || statut(y,mat)==-1);
 
   inserer(y,statut(y,mat),j1,mat);                          //on insere la piece
-  
+
   afficher_mat(mat);
-  
-  if(quiGagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+
+  if(quigagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
     // tour du deuxieme joueur de jouer
     y=0;
@@ -356,10 +356,10 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
 
 }
 
-if(quiGagne(mat)==1){
+if(quigagne(mat)==1){
   printf("le joueur qui a les rouges a gagné ");
 }
-else if(quiGagne(mat)==2){
+else if(quigagne(mat)==2){
   printf("le joueur qui a les jaunes a gagné ");
 }
 
@@ -368,9 +368,9 @@ else if(quiGagne(mat)==2){
 
 
 int main(){
-  
+
 joueur j1,j2;
-  
+
 JouerNormal1vs1(mat,j1,j2);
 
 }
