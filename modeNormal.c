@@ -1,20 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "structD.h"
 
-#define N  7
-#define M  7
-
-
-
-char mat[N][M];
-
-
-typedef struct joueurs_s {
-
-  char * nom;
-  char * couleur;
-
-}joueur ;
 
 int statut(int y, char mat[N][M]){
   int x;
@@ -319,6 +306,7 @@ initMatrice(mat);
 afficher_mat(mat);
 j1.couleur="rouge";
 j2.couleur="jaune";
+
 while( quigagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
@@ -368,14 +356,3 @@ else if(quigagne(mat)==2){
 }
 
 }
-
-
-
-int main(){
-
-joueur j1,j2;
-
-JouerNormal1vs1(mat,j1,j2);
-
-}
-
