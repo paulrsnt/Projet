@@ -341,13 +341,13 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
     printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
     scanf("%d",&x);
 
-  if (statut(x,mat[N][M],P1)==-1) {
+  if (statut(x,mat,P1)==-1) {
     printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
   }
 
-  }while ((x<0||x>6) || statut(x,mat[N][M],P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+  }while ((x<0||x>6) || statut(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
-  inserer(x,statut(x,mat[N][M],P1),j1,mat,P1);                          //on insere la piece
+  inserer(x,statut(x,mat,P1),j1,mat,P1);                          //on insere la piece
 
   if(quiGagne(mat,j1)==0){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
@@ -360,13 +360,13 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
       printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x);
 
-    if (statut(x,mat[N][M],P1)==-1) {
+    if (statut(x,mat,P1)==-1) {
       printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
     }
 
-    }while ((x<0||x>6) || statut(x,mat[N][M],P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+    }while ((x<0||x>6) || statut(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
-    inserer(x,statut(x,mat[N][M],P1),j1,mat,P1);
+    inserer(x,statut(x,mat,P1),j1,mat,P1);
   }
 
     x=0;
@@ -377,13 +377,13 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
       printf("Joueur3 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x);
 
-    if (statut(x,mat[N][M],P1)==-1) {
+    if (statut(x,mat,P1)==-1) {
       printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
     }
 
-    }while ((x<0||x>6) || statut(x,mat[N][M],P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+    }while ((x<0||x>6) || statut(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
-    inserer(x,statut(x,mat[N][M],P1),j1,mat,P1);
+    inserer(x,statut(x,mat,P1),j1,mat,P1);
   }
 
     x=0;
@@ -394,13 +394,13 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
       printf("Joueur4 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x); 
 
-    if (statut(x,mat[N][M],P1)==-1) {
+    if (statut(x,mat,P1)==-1) {
       printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
     }
 
-    }while ((x<0||x>6) || statut(x,mat[N][M],P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
+    }while ((x<0||x>6) || statut(x,mat,P1)==-1 || TypePiece != 1 || TypePiece != 2 ||TypePiece != 3 );
 
-    inserer(x,statut(x,mat[N][M],P1),j1,mat,P1);
+    inserer(x,statut(x,mat,P1),j1,mat,P1);
   }
 
 }
