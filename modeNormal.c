@@ -25,7 +25,7 @@ int statut(int x, char mat[N][M]){
 
 }
 
-void initMatrice(int char[N][M]){
+void initMatrice(char mat[N][M]){
 	int i,j;
 
 	for(int i=0 ; i< N ; i++){
@@ -33,6 +33,7 @@ void initMatrice(int char[N][M]){
 			mat[i][j] = ' ';
 		}
 	}
+}
   
 void afficher_mat(char mat[N][M]){
 /*fonction qui permet de afficher la matrice*/
@@ -257,7 +258,7 @@ int gagnant_diagonale(char mat[N][M]){
 
 
 
-void quigagne(char mat[N][M]){
+int quigagne(char mat[N][M]){
 //fonction permettant de savoir qui a gagné en ayant 4 piece alignées.
 
     int lig ;
@@ -320,10 +321,10 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
   do{
 
     printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
-    scanf("%d",&x);
+    scanf("%i",&x);
 
   if (statut(x,mat)==-1) {
-    printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
+    printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n",&x);
   }
 
 }while ((x<0||x>6) || statut(x,mat)==-1);
@@ -340,10 +341,10 @@ while( quiGagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue
     do{
 
       printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
-      scanf("%d",&x);
+      scanf("%i",&x);
 
     if (statut(x,mat)==-1) {
-      printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
+      printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n",&x);
     }
 
   }while ((x<0||x>6) || statut(x,mat)==-1);
