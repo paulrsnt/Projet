@@ -17,8 +17,9 @@ typedef struct joueurs_s {
 }joueur ;
 
 int statut(int x, char mat[N][M]){
+  int y;
 
-  for (int y = M ; (mat[x][y]==("R"||"J")) || (y > 0) ; y--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+  for (y = M ; (mat[x][y]==('R'||'J')) || (y > 0) ; y--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
 
     return y ;
 
@@ -27,10 +28,10 @@ int statut(int x, char mat[N][M]){
 void inserer(int x, int y, joueur t, char mat[N][M]){
 
   if (t.couleur=="rouge") {
-    mat[x][y]="R";
+    mat[x][y]='R';
   }
   else if (t.couleur=="jaune") {
-    mat[x][y]="J";
+    mat[x][y]='J';
   }
 
 }
@@ -291,7 +292,7 @@ void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 int x=0;
 
 
-while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
+while( quiGagne(mat)!=1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
@@ -336,7 +337,7 @@ quiGagne(mat);
 
 
 int main(){
-
+joueur j1,j2;
 JouerNormal1vs1(mat,j1,j2);
 
 }
