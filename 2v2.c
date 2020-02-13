@@ -271,7 +271,7 @@ int gagnant_diagonale(char mat[N][M]){
 
 
 
-void quigagne(char mat[N][M]){
+int quigagne(char mat[N][M]){
 //fonction permettant de savoir qui a gagné en ayant 4 piece alignées.
 
     int lig ;
@@ -326,13 +326,17 @@ void Jouer2vs2(char mat[N][M], joueur j1, joueur j2, joueur j3, joueur j4, piece
 int x=0;
 int TypePiece=0;
 
+j1.couleur="rouge";
+j2.couleur="jaune";
+j3.couleur="rouge";
+j4.couleur="jaune";
 
 while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiGagne(mat,j4)!=1 ){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
   do{
-    printf("Joueur 1 :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+    printf("Joueur 1 (equipe rouge) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
     scanf("%d",&TypePiece);
     printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
     scanf("%d",&x);
@@ -351,7 +355,7 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
     x=0;
 
     do{
-      printf("Joueur 2 :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+      printf("Joueur 2 (equipe jaune) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
       scanf("%d",&TypePiece);
       printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x);
@@ -368,7 +372,7 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
     x=0;
 
     do{
-      printf("Joueur 3 :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+      printf("Joueur 3 (equipe rouge) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
       scanf("%d",&TypePiece);
       printf("Joueur3 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
       scanf("%d",&x);
@@ -385,10 +389,10 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
     x=0;
 
     do{
-      printf("Joueur 4 :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
+      printf("Joueur 4 (equipe jaune) :Choisissez le type de votre piece (1 = bloquante , 2 = creuse , 3 = pleine):\n");
       scanf("%d",&TypePiece);
       printf("Joueur4 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 0 et 6):\n");
-      scanf("%d",&x);
+      scanf("%d",&x); 
 
     if (statut(x,mat[N][M],P1)==-1) {
       printf("Erreur sur les coordonnée des y : la colonne %d est rempli essayer une autre \n",&x);
@@ -401,20 +405,13 @@ while( quiGagne(mat,j1)!=1 || quiGagne(mat,j2)!=1 || quiGagne(mat,j3)!=1 || quiG
 
 }
 
-if (quiGagne(mat,j1)==1) {
-  printf("Le joueur 1 et 2 ont gagnés !!!! \n", );
+if (quiGagne(mat)==1) {
+  printf("Le joueur 1 et 3 ont gagnés !!!! \n", );
 }
 
-else if (quiGagne(mat,j2)==1) {
-  printf("Le joueur 1 et 2 ont gagnés !!!! \n", );
-}
 
-else if (quiGagne(mat,j3)==1) {
-  printf("Le joueur 3 et 4 ont gagnés !!!! \n", );
-}
-
-else if (quiGagne(mat,j4)==1) {
-  printf("Le joueur 3 et 4 ont gagnés !!!! \n", );
+else if (quiGagne(mat)==1) {
+  printf("Le joueur 2 et 4 ont gagnés !!!! \n", );
 }
 
 
