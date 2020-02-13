@@ -19,7 +19,7 @@ typedef struct joueurs_s {
 int statut(int y, char mat[N][M]){
   int x;
 
-  for (x = 0 ; (mat[x][y]==('R'||'J')) || (x < M) ; x++) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+  for (x = M-1 ; (((mat[x][y]==('R'))||((mat[x][y]==('J'))) || (x < 0) ; x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
 
     return x ;
 
