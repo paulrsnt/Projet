@@ -13,7 +13,7 @@ int statut(int y, char mat[N][M]){
 }
 
 void initMatrice(char mat[N][M]){
-/* fonction qui permet de insérer un epièce dans la matrice */
+/* fonction qui permet de initialiser la matrice */
 	int i,j;
 
 	for(i=1 ; i< N ; i++){
@@ -21,7 +21,7 @@ void initMatrice(char mat[N][M]){
 			mat[i][j] = 'o';
 		}
 	}
-  for(j=0 ; j < M ; j++){
+  for(j=0 ; j < M ; j++){	/* permet de faire une bordure dans la matrice qui vas permettre de ne pas sortir de la matrice */	 
       mat[0][j]= '*';
     }
 
@@ -39,7 +39,7 @@ void afficher_mat(char mat[N][M]){
 }
 
 void inserer(int y, int x, joueur t, char mat[N][M]){
-
+/* fonction qui permet de insérer un epièce dans la matrice */
   if (t.couleur=="rouge") {
     mat[x][y]='R';
   }
@@ -50,7 +50,7 @@ void inserer(int y, int x, joueur t, char mat[N][M]){
 }
 
 int gagnant_ligne(char mat[N][M]){
-    /* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
+/* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
     int i, j;
     for (i = 0; i < N; i++)
     {
