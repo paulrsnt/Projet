@@ -13,6 +13,7 @@ int statut(int y, char mat[N][M]){
 }
 
 void initMatrice(char mat[N][M]){
+/* fonction qui permet de insérer un epièce dans la matrice */
 	int i,j;
 
 	for(i=1 ; i< N ; i++){
