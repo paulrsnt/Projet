@@ -49,13 +49,13 @@ void inserer(int y, int x, joueur t, char mat[N][M]){
 }
 
 int gagnant_ligne(char mat[N][M]){
-    //fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu
+    /* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
     int i, j;
     for (i = 0; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
-            //returne 1 si le joueur rouge a gagneé
+            /* toutes les combinaison en ligne pour le joueur rouge et retourne 1 si il a gagné */
             if(mat[i][j] == 'R')
             {
                 if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j]== mat[i][j+2]))
@@ -76,7 +76,7 @@ int gagnant_ligne(char mat[N][M]){
                 }
 
             }
-            //returne 2 si le joueur jaune a gagneé
+            /* toutes les combinaison en lignes pour le joueur jaune et retourne 2 si il a gagné */
             if(mat[i][j] ==  'J')
             {
                 if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
@@ -101,12 +101,12 @@ int gagnant_ligne(char mat[N][M]){
 
         }
     }
-    return 0;
+    return 0;         /* aucun gagnant dans les lignes */
 }
 
 
 int gagnant_colonne(char mat[N][M]){
-//fonction permettant de voir si il y a un gagnant sur les colonnes du plateau de jeu
+/* fonction qui vérifie si il y a un gagnant sur les colonnes du plateau de jeu */
     int i, j;
 
     for (i = 0; i < N; i++)
@@ -114,7 +114,7 @@ int gagnant_colonne(char mat[N][M]){
         for(j = 0; j < M; j++)
         {
 
-            //returne 1 si le joueur rouge a gagneé
+            /* toutes les combinaison en colonne pour le joueur rouge et retourne 1 si il a gagné */
              if(mat[i][j] == 'R')
             {
                 if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]))
@@ -134,7 +134,7 @@ int gagnant_colonne(char mat[N][M]){
                     return 1;
                 }
             }
-            //returne 2 si le joueur jaune a gagneé
+            /* toutes les combinaison en colonne pour le joueur jaune et retourne 2 si il a gagné */
             if(mat[i][j] ==  'J')
             {
                 if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]))
@@ -157,18 +157,18 @@ int gagnant_colonne(char mat[N][M]){
 
         }
     }
-    return 0;
+    return 0;             /* aucun gagnant dans les collonnes */
 }
 
 
 int gagnant_diagonale(char mat[N][M]){
-//fonction verifiant si il y a un gagnant sur une diagonale du plateau de jeu
+/* fonction qui verifie si il y a un gagnant sur les diagonales du plateau de jeu */
     int i, j;
     for (i = 0; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
-            //returne 1 si le joueur rouge a gagné
+            /* toutes les combinaison en diagonales pour le joueur rouge et retourne 1 si il a gagné */
             if(mat[i][j] == 'R')
             {
                 if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
@@ -205,7 +205,7 @@ int gagnant_diagonale(char mat[N][M]){
                 }
 
             }
-            //returne 2 si le joueur jaune a gagné
+            /* toutes les combinaison en diagonales pour le joueur jaune et retourne 2 si il a gagné */
             if(mat[i][j] ==  'J')
             {
                 if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
@@ -244,13 +244,13 @@ int gagnant_diagonale(char mat[N][M]){
 
         }
     }
-    return 0;
+    return 0;           /* aucun gagnant dans les diagonales */
 }
 
 
 
-int quigagne(char mat[N][M]){
-//fonction permettant de savoir qui a gagné en ayant 4 piece alignées.
+int qui_gagne(char mat[N][M]){
+/* fonction permettant de savoir qui a gagné en ayant 4 piece alignées. */
 
     int lig ;
     int col;
@@ -260,39 +260,39 @@ int quigagne(char mat[N][M]){
 
     if(lig == 1)
     {
-        return 1;
+        return 1;               /* joueur Rouge a gagné */
     }
     else if(lig == 2)
     {
-          return 2;
+          return 2;             /* joueur Jaune a gagné */
     }
-    else
+    else                        /* si il n'y a pas de gagnant avec un alignement en ligne on regarde les collonnes */
     {
         col = gagnant_colonne(mat);
 
         if(col == 1)
         {
-            return 1;
+            return 1;           /* joueur Rouge a gagné */
         }
         else if(col == 2)
         {
-            return 2;
+            return 2;           /* joueur Jaune a gagné */
         }
-        else
+        else                    /* si il n'y a pas de gagnant avec un alignement en collonne on regarde les diagonales */
         {
             diag = gagnant_diagonale(mat);
 
             if(diag == 1)
             {
-                return 1;
+                return 1;           /* joueur Rouge a gagné */
             }
             else if(diag == 2)
             {
-                return 2;
+                return 2;           /* joueur Jaune a gagné */
             }
-            else
+            else                    /* si il n'y a pas de gagnant avec un alignement en diagonale */
             {
-                return 0;
+                return 0;           /* égalité aucun joueur n'a gagné */
             }
         }
     }
