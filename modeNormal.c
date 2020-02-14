@@ -309,26 +309,26 @@ afficher_mat(mat);
 j1.couleur="rouge";
 j2.couleur="jaune";
 
- while( quigagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
+ while( qui_gagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
 
   // tour du premier joueur de jouer
 
   do{
-	while(1){              /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
-       	  printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");
-          scanf("%lf",&y);
-          tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
-          if(tmp == y){
-            break;             /* on sort de la boucle si c'est un nombre entier */
-          }
-          else{
-            printf("Veuillez saisir un entier\n");          /* sinon on redemande à l'utilisateur de saisir un nombre entier */
-          }
-        }
+	 while(1){              /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
+       	   printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");
+           scanf("%lf",&y);
+           tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
+           if(tmp == y){
+             break;             /* on sort de la boucle si c'est un nombre entier */
+           }
+           else{
+             printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
+           }
+         }
 	
-  	if (statut(y-1,mat)==0) {
+  	 if (statut(y-1,mat)==0) {
     	  printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n\n",y);
-  	}
+  	 }
 
   }while ((y<1||y>7) || statut(y-1,mat)==0);
   y--;
@@ -336,7 +336,7 @@ j2.couleur="jaune";
 
   afficher_mat(mat);
 
-  if(quigagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+  if(qui_gagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
     // tour du deuxieme joueur de jouer
     y=0;
@@ -352,7 +352,7 @@ j2.couleur="jaune";
          else{
            printf("Veuillez saisir un entier\n"); /* sinon on redemande à l'utilisateur de saisir un nombre entier */
          }
-       }
+       	}
 
        if (statut(y-1,mat)==0) {
          printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n\n",y);
@@ -366,10 +366,10 @@ j2.couleur="jaune";
 
  }
 
-  if(quigagne(mat)==1){
-    printf("le joueur qui a les rouges a gagné ");
+  if(qui_gagne(mat)==1){
+    printf("le joueur qui a les rouges a gagné \n");
   }
-  else if(quigagne(mat)==2){
-    printf("le joueur qui a les jaunes a gagné ");
+  else if(qui_gagne(mat)==2){
+    printf("le joueur qui a les jaunes a gagné \n");
   }
 }
