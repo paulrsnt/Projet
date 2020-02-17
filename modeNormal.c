@@ -2,6 +2,50 @@
 #include <stdlib.h>
 #include "structD.h"
 
+/**
+
+* \file modeNormal.c
+* \brief Programme contenant les fonctions du jeu normal 1vs1 en local 4++
+* \author Aaron Amani Oussama Belkadi Fathi et Paul riga
+* \version 1.0
+* \date 17 fevrier 2020
+
+*/
+
+
+/**
+ * \fn int grille_plein(char mat[N][M])
+ * \brief fonction qui retourne 1 si la grille est pleine, 0 si elle ne l'est pas
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
+
+int grille_plein(char mat[N][M]){
+  int cpt=0;
+  for (int i = 1; i < N; i++) {
+    for (int y = 0; y < M; y++) {
+      if (mat[i][y]=='R'||mat[i][y]=='J');
+      else{
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
+
+
+
+/**
+ * \fn int statut(int y, char mat[N][M])
+ * \brief verifie le numero de colonne et retourne la ligne de disponible ou pas
+ *
+ * \param y numero de colonne.
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
 
 int statut(int y, char mat[N][M]){
   int x;
@@ -12,13 +56,22 @@ int statut(int y, char mat[N][M]){
 
 }
 
+/**
+ * \fn void initMatrice(char mat[N][M])
+ * \brief fonction qui initialise la matrice
+ *
+ * \param mat la grille du jeu.
+ *
+ *
+*/
+
 void initMatrice(char mat[N][M]){
 /* fonction qui permet de initialiser la matrice */
 	int i,j;
 
 	for(i=1 ; i< N ; i++){
 		for(j=0 ; j < M ; j++){
-			mat[i][j] = 'o';
+			mat[i][j] = ' ';
 		}
 	}
   for(j=0 ; j < M ; j++){	/* permet de faire une bordure dans la matrice qui vas permettre de ne pas sortir de la matrice */
@@ -27,16 +80,38 @@ void initMatrice(char mat[N][M]){
 
 }
 
+
+/**
+ * \fn void afficher_mat(char mat[N][M])
+ * \brief fonction qui affiche la matrice du jeu
+ *
+ * \param mat la grille du jeu.
+ *
+ *
+*/
+
 void afficher_mat(char mat[N][M]){
-/*fonction qui permet de afficher la matrice*/
     int i, j;
-    for(i=1;i<N;i++){       /*parcour de la ligne*/
-        for(j=0;j<M;j++){   /*parcour du colonnes*/
-            printf("%c | ", mat[i][j]);
+    for(i=1;i<N;i++){
+        for(j=0;j<M;j++){
+            printf("| %c |", mat[i][j]);
         }
         printf("\n");
     }
 }
+
+
+/**
+ * \fn void inserer(int y, int x, joueur t, char mat[N][M])
+ * \brief fonction qui permet a l'utilisateur d'inserer une piece
+ *
+ * \param y numero de la colonne
+ * \param x numero de la ligne
+ * \param t structure representant le joueur
+ * \param mat la grille du jeu.
+ *
+ *
+*/
 
 void inserer(int y, int x, joueur t, char mat[N][M]){
 /* fonction qui permet de insérer un epièce dans la matrice */
@@ -48,6 +123,15 @@ void inserer(int y, int x, joueur t, char mat[N][M]){
   }
 
 }
+
+/**
+ * \fn int gagnant_ligne(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes gagnent avec les pion en lignes ou 2 si les rouges gagnent avec les pion en lignes
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
 
 int gagnant_ligne(char mat[N][M]){
 /* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
@@ -106,6 +190,15 @@ int gagnant_ligne(char mat[N][M]){
 }
 
 
+/**
+ * \fn int gagnant_colonne(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes gagnent avec les pion en colonnes ou 2 si les rouges gagnent avec les pion en colonnes
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
+
 int gagnant_colonne(char mat[N][M]){
 /* fonction qui vérifie si il y a un gagnant sur les colonnes du plateau de jeu */
     int i, j;
@@ -160,6 +253,15 @@ int gagnant_colonne(char mat[N][M]){
     }
     return 0;             /* aucun gagnant dans les collonnes */
 }
+
+/**
+ * \fn int gagnant_diagonale(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes gagnent avec les pion en diagonale ou 2 si les rouges gagnent avec les pion en diagonale
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
 
 
 int gagnant_diagonale(char mat[N][M]){
@@ -249,6 +351,15 @@ int gagnant_diagonale(char mat[N][M]){
 }
 
 
+/**
+ * \fn int gagnant_colonne(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes  ou 2 si les rouges
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
+
 
 int qui_gagne(char mat[N][M]){
 /* fonction permettant de savoir qui a gagné en ayant 4 piece alignées. */
@@ -300,6 +411,17 @@ int qui_gagne(char mat[N][M]){
 }
 
 
+/**
+ * \fn void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2)
+ * \brief fonction qui permet de jouer a 1vs1 en mode normal
+ *
+ * \param mat la grille du jeu.
+ * \param j2 joueur 2.
+ * \param j1 joueur 1.
+ *
+*/
+
+
 void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 
 double y=0;
@@ -339,9 +461,13 @@ j2.couleur="jaune";
 
   inserer(y,statut(y,mat),j1,mat);                          //on insere la piece
 
+  if (grille_plein(mat)) {
+    printf("La grille est pleine match null \n");
+    break;
+  }
+
   system("clear");
 
-  printf("\033[H\033[2J");
   afficher_mat(mat);
   printf("\n\n");
 
@@ -371,6 +497,11 @@ j2.couleur="jaune";
     y--;
 
     inserer(y,statut(y,mat),j2,mat);
+
+    if (grille_plein(mat)) {
+      printf("La grille est pleine match null \n");
+      break;
+    }
 
     system("clear");
 

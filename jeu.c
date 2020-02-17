@@ -2,12 +2,20 @@
 #include <stdlib.h>
 #include "structD.h"
 
-int main() {
 
+/**
+* \file jeu.c
+* \brief Programme permettant de jouer au puissance 4++
+* \author Aaron Amani Oussama Belkadi Fathi et Paul riga
+* \version 1.0
+* \date 17 fevrier 2020
+
+*/
+
+int main() {
 
 int x=0;
 
-printf("\033[H\033[2J");
 
 printf("###############################\n");
 printf("###                          ##\n");
