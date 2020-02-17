@@ -4,7 +4,10 @@
 
 int main() {
 
+
 int x=0;
+
+printf("\033[H\033[2J");
 
 printf("###############################\n");
 printf("###                          ##\n");
@@ -16,23 +19,22 @@ printf("###                          ##\n");
 printf("###                          ##\n");
 printf("###############################\n");
 
-printf("Voici le jeu du puissance 4++ \n\n");
-printf("Ce Jeu comporte plusieurs mode \n");
-printf("Quel mode choisissez vous ?? \n\n\n");
-
+printf("CHOISISSEZ UN MODE DE JEU : \n\n");
 
 while(x!=3){
 
   do {
-    printf("Appuyer sur la touche 1 pour lancer une partie 1 vs 1 en local\n\n");
-    printf("Appuyer sur la touche 2 pour lancer une partie 2 vs 2 en local (ce mode comporte les fonctions specifiques des pieces)\n\n");
-    printf("Appuyer sur la touche 3 pour quitter le jeu \n\n");
-
+    printf("LOCAL 1 VS 1 : Appuyer sur la touche 1 \n\n");
+    printf("LOCAL 2 VS 2 : Appuyer sur la touche 2 \n\n");
+    printf("QUITTER LE JEU : Appuyer sur la touche 3 \n\n");
 
     scanf("%d",&x);
 
+    system("clear");
+
     if((x!=1)&&(x!=2)&&(x!=3)){
-      printf("Veuillez taper 1,2 ou 3 merci  %d   !!\n\n\n",x);
+      printf("Veuillez taper sur les touches 1, 2 ou 3 \n\n\n");
+
     }
 
   } while((x!=1)&&(x!=2)&&(x!=3));
@@ -41,14 +43,17 @@ while(x!=3){
 
   if(x==1){
     int y=0;
+    while (y!=2) {
 
-    JouerNormal1vs1(mat,j1,j2);
-    printf("\n\n");
-    printf("Voulez vous rejouer ?\n");
-    do {
-      printf("1 pour oui 2 pour quitter \n");
-      scanf("%d",&y);
-    } while(y!=1&&y!=2);
+      JouerNormal1vs1(mat,j1,j2);
+      printf("\n\n");
+      printf("Voulez vous rejouer ?\n");
+      do {
+        printf("Taper 1 pour rejouer, taper 2 pour quitter ce mode \n");
+        scanf("%d",&y);
+        system("clear");
+      } while((y!=1)&&(y!=2));
+    }
 
   }
   else if (x==2) {

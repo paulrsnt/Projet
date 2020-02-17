@@ -21,7 +21,7 @@ void initMatrice(char mat[N][M]){
 			mat[i][j] = 'o';
 		}
 	}
-  for(j=0 ; j < M ; j++){	/* permet de faire une bordure dans la matrice qui vas permettre de ne pas sortir de la matrice */	 
+  for(j=0 ; j < M ; j++){	/* permet de faire une bordure dans la matrice qui vas permettre de ne pas sortir de la matrice */
       mat[0][j]= '*';
     }
 
@@ -30,7 +30,7 @@ void initMatrice(char mat[N][M]){
 void afficher_mat(char mat[N][M]){
 /*fonction qui permet de afficher la matrice*/
     int i, j;
-    for(i=0;i<N;i++){       /*parcour de la ligne*/
+    for(i=1;i<N;i++){       /*parcour de la ligne*/
         for(j=0;j<M;j++){   /*parcour du colonnes*/
             printf("%c | ", mat[i][j]);
         }
@@ -303,9 +303,13 @@ int qui_gagne(char mat[N][M]){
 void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 
 double y=0;
-int tmp = 0;	
+int tmp = 0;
 initMatrice(mat);
+
+printf("\033[H\033[2J");
 afficher_mat(mat);
+printf("\n\n");
+
 j1.couleur="rouge";
 j2.couleur="jaune";
 
@@ -325,16 +329,21 @@ j2.couleur="jaune";
              printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
            }
          }
-	
+
   	 if (statut(y-1,mat)==0) {
-    	  printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n\n",y);
+    	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
   	 }
 
   }while ((y<1||y>7) || statut(y-1,mat)==0);
   y--;
+
   inserer(y,statut(y,mat),j1,mat);                          //on insere la piece
 
+  system("clear");
+
+  printf("\033[H\033[2J");
   afficher_mat(mat);
+  printf("\n\n");
 
   if(qui_gagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
 
@@ -355,13 +364,20 @@ j2.couleur="jaune";
        	}
 
        if (statut(y-1,mat)==0) {
-         printf("Erreur sur les coordonnée des y : la colonne %i est rempli essayer une autre \n\n",y);
+         printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
        }
 
     }while ((y<1||y>7) || statut(y-1,mat)==0);
     y--;
+
     inserer(y,statut(y,mat),j2,mat);
+
+    system("clear");
+
+    printf("\033[H\033[2J");
     afficher_mat(mat);
+    printf("\n\n");
+
   }
 
  }
