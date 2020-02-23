@@ -6,7 +6,7 @@
 
 * \file modeNormal.c
 * \brief Programme contenant les fonctions du jeu normal 1vs1 en local 4++
-* \author Aaron Amani Oussama Belkadi Fatih Ufacik et Paul riga
+* \author Aaron Amani Oussama Belkadi Fathi et Paul riga
 * \version 1.0
 * \date 17 fevrier 2020
 
@@ -34,8 +34,6 @@ int grille_plein(char mat[N][M]){
   }
   return 1;
 }
-
-
 
 /**
  * \fn int statut(int y, char mat[N][M])
@@ -124,6 +122,688 @@ void inserer(int y, int x, joueur t, char mat[N][M]){
 
 }
 
+
+/**
+ * \fn int gagnant_lignev2(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes gagnent avec les pion en lignes ou 2 si les rouges gagnent avec les pion en lignes
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
+
+int parcours_ligne(char mat[N][M]){
+/* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
+    int i, j;
+    for (i = 0; i < N; i++)
+    {
+        for(j = 0; j < M; j++)
+        {
+            /* toutes les combinaison en ligne pour le joueur rouge et retourne 1 si il a gagné */
+            if(mat[i][j] == 'R')
+            {
+
+              if ((j-1)>=0 || (j-1)<=6 ) {
+                if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
+                    {
+                      mat[i][j]='*';
+                      mat[i][j-1]=mat[i][j] ;
+                      mat[i][j+1]=mat[i][j];
+                      mat[i][j+2]=mat[i][j];
+                              system("clear");
+                      afficher_mat(mat);
+                      return 1;
+                  }
+                }
+              }
+            }
+
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j+1)>=0 || (j+1)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
+                      {
+                        mat[i][j]='*';
+                        mat[i][j-1]=mat[i][j] ;
+                        mat[i][j-2]=mat[i][j];
+                        mat[i][j+1]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 1;
+                    }
+                  }
+                }
+              }
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j-3)>=0 || (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
+                      {
+                        mat[i][j]='*';
+                        mat[i][j-1]=mat[i][j] ;
+                        mat[i][j-2]=mat[i][j];
+                        mat[i][j-3]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 1;
+                    }
+                  }
+                }
+              }
+                else if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if ((j+3)>=0 || (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
+                      {
+                        mat[i][j]='*';
+                        mat[i][j+1]=mat[i][j] ;
+                        mat[i][j+2]=mat[i][j];
+                        mat[i][j+3]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 1;
+                    }
+                  }
+                }
+              }
+
+            }
+            /* toutes les combinaison en lignes pour le joueur jaune et retourne 2 si il a gagné */
+            if(mat[i][j] ==  'J')
+            {
+
+              if ((j-1)>=0 || (j-1)<=6 ) {
+                if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
+                    {
+                      mat[i][j]='*';
+                      mat[i][j-1]=mat[i][j] ;
+                      mat[i][j+1]=mat[i][j];
+                      mat[i][j+2]=mat[i][j];
+                              system("clear");
+                      afficher_mat(mat);
+                      return 2;
+                  }
+                }
+              }
+            }
+
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j+1)>=0 || (j+1)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
+                      {
+                        mat[i][j]='*';
+                        mat[i][j-1]=mat[i][j] ;
+                        mat[i][j-2]=mat[i][j];
+                        mat[i][j+1]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 2;
+                    }
+                  }
+                }
+              }
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j-3)>=0 || (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
+                      {
+                        mat[i][j]='*';
+                        mat[i][j-1]=mat[i][j] ;
+                        mat[i][j-2]=mat[i][j];
+                        mat[i][j-3]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 2;
+                    }
+                  }
+                }
+              }
+                else if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if ((j+3)>=0 || (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
+                      {
+                        mat[i][j]='*';
+                        mat[i][j+1]=mat[i][j] ;
+                        mat[i][j+2]=mat[i][j];
+                        mat[i][j+3]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 2;
+                    }
+                  }
+                }
+              }
+
+            }
+
+        }
+    }
+    return 0;         /* aucun gagnant dans les lignes */
+}
+
+
+/**
+ * \fn int gagnant_colonnev2(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes gagnent avec les pion en colonnes ou 2 si les rouges gagnent avec les pion en colonnes
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
+
+int parcours_colonne(char mat[N][M]){
+/* fonction qui vérifie si il y a un gagnant sur les colonnes du plateau de jeu */
+    int i, j;
+
+    for (i = 0; i < N; i++)
+    {
+        for(j = 0; j < M; j++)
+        {
+
+            /* toutes les combinaison en colonne pour le joueur rouge et retourne 1 si il a gagné */
+             if(mat[i][j] == 'R')
+             {
+
+               if ((i-1)>=0 || (i-1)<=6 ) {
+                 if ((i+1)>=0 || (i+1)<=6 ) {
+                   if ((i+2)>=0 || (i+2)<=6 ) {
+                     if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
+                     {
+                       mat[i][j]='*';
+                       mat[i-1][j]=mat[i][j] ;
+                       mat[i+1][j]=mat[i][j];
+                       mat[i+2][j]=mat[i][j];
+                               system("clear");
+                       afficher_mat(mat);
+                       return 1;
+                   }
+                 }
+               }
+             }
+
+                 else if ((i-1)>=0 || (i-1)<=6 ) {
+                   if ((i-2)>=0 || (i-2)<=6 ) {
+                     if ((i+1)>=0 || (i+1)<=6 ) {
+                       if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i+1][j]))
+                       {
+                         mat[i][j]='*';
+                         mat[i-1][j]=mat[i][j] ;
+                         mat[i-2][j]=mat[i][j];
+                         mat[i+1][j]=mat[i][j];
+                                 system("clear");
+                         afficher_mat(mat);
+                         return 1;
+                     }
+                   }
+                 }
+               }
+                 else if ((i-1)>=0 || (i-1)<=6 ) {
+                   if ((i-2)>=0 || (i-2)<=6 ) {
+                     if ((i-3)>=0 || (i-3)<=6 ) {
+                       if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
+                       {
+                         mat[i][j]='*';
+                         mat[i-1][j]=mat[i][j] ;
+                         mat[i-2][j]=mat[i][j];
+                         mat[i-3][j]=mat[i][j];
+                                 system("clear");
+                         afficher_mat(mat);
+                         return 1;
+                     }
+                   }
+                 }
+               }
+                 else if ((i+1)>=0 || (i+1)<=6 ) {
+                   if ((i+2)>=0 || (i+2)<=6 ) {
+                     if ((i+3)>=0 || (i+3)<=6 ) {
+                       if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
+                       {
+                         mat[i][j]='*';
+                         mat[i-1][j]=mat[i][j] ;
+                         mat[i+2][j]=mat[i][j];
+                         mat[i+3][j]=mat[i][j];
+                                 system("clear");
+                         afficher_mat(mat);
+                         return 1;
+                     }
+                   }
+                 }
+               }
+
+             }
+            /* toutes les combinaison en colonne pour le joueur jaune et retourne 2 si il a gagné */
+            if(mat[i][j] ==  'J')
+            {
+
+              if ((i-1)>=0 || (i-1)<=6 ) {
+                if ((i+1)>=0 || (i+1)<=6 ) {
+                  if ((i+2)>=0 || (i+2)<=6 ) {
+                    if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
+                    {
+                      mat[i][j]='*';
+                      mat[i-1][j]=mat[i][j] ;
+                      mat[i+1][j]=mat[i][j];
+                      mat[i+2][j]=mat[i][j];
+                              system("clear");
+                      afficher_mat(mat);
+                      return 2;
+                  }
+                }
+              }
+            }
+
+                else if ((i-1)>=0 || (i-1)<=6 ) {
+                  if ((i-2)>=0 || (i-2)<=6 ) {
+                    if ((i+1)>=0 || (i+1)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i+1][j]))
+                      {
+                        mat[i][j]='*';
+                        mat[i-1][j]=mat[i][j] ;
+                        mat[i-2][j]=mat[i][j];
+                        mat[i+1][j]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 2;
+                    }
+                  }
+                }
+              }
+                else if ((i-1)>=0 || (i-1)<=6 ) {
+                  if ((i-2)>=0 || (i-2)<=6 ) {
+                    if ((i-3)>=0 || (i-3)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
+                      {
+                        mat[i][j]='*';
+                        mat[i-1][j]=mat[i][j] ;
+                        mat[i-2][j]=mat[i][j];
+                        mat[i-3][j]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 2;
+                    }
+                  }
+                }
+              }
+                else if ((i+1)>=0 || (i+1)<=6 ) {
+                  if ((i+2)>=0 || (i+2)<=6 ) {
+                    if ((i+3)>=0 || (i+3)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
+                      {
+                        mat[i][j]='*';
+                        mat[i-1][j]=mat[i][j] ;
+                        mat[i+2][j]=mat[i][j];
+                        mat[i+3][j]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                        return 2;
+                    }
+                  }
+                }
+              }
+
+            }
+
+        }
+    }
+    return 0;             /* aucun gagnant dans les collonnes */
+}
+
+/**
+ * \fn int gagnant_diagonalev2(char mat[N][M])
+ * \brief fonction retourne 1 si les jaunes gagnent avec les pion en diagonale ou 2 si les rouges gagnent avec les pion en diagonale
+ *
+ * \param mat la grille du jeu.
+ *
+ * \return int.
+*/
+
+
+int parcours_diagonale(char mat[N][M]){
+/* fonction qui verifie si il y a un gagnant sur les diagonales du plateau de jeu */
+    int i, j;
+    for (i = 0; i < N; i++)
+    {
+        for(j = 0; j < M; j++)
+        {
+            /* toutes les combinaison en diagonales pour le joueur rouge et retourne 1 si il a gagné */
+            if(mat[i][j] == 'R')
+            {
+
+                  if ( ((i-1)>=0 && (i-1)<=6) && ((j+1)>=0 && (j+1)<=6) ) {
+                    if ( ((i-2)>=0 && (i-2)<=6) && ((j+2)>=0 && (j+2)<=6) ) {
+                      if ( ((i-3)>=0 && (i-3)<=6) && ((j+3)>=0 && (j+3)<=6) ) {
+                        if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
+                        {
+                        mat[i][j]='*';
+                        mat[i-1][j+1]=mat[i][j] ;
+                        mat[i-2][j+2]=mat[i][j];
+                        mat[i-3][j+3]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+
+
+                }
+
+
+                  if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if ( (i+3)>=0 && (i+3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                        if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
+                        {
+                        mat[i][j]='*';
+                        mat[i+1][j-1]=mat[i][j];
+                        mat[i+2][j-2]=mat[i][j];
+                        mat[i+3][j-3]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+
+
+                }
+
+                  if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                      if ( (i-2)>=0 && (i-2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                        if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
+                        {
+                        mat[i][j]='*';
+                        mat[i+1][j-1]=mat[i][j];
+                        mat[i-1][j+1]=mat[i][j];
+                        mat[i-2][j+2]=mat[i][j];
+                                system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+                }
+
+                  if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                      if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                        if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
+                        {
+                        mat[i][j]='*';
+                        mat[i-1][j+1]=mat[i][j]+1;
+                        mat[i+1][j-1]=mat[i][j]+1;
+                        mat[i+2][j-2]=mat[i][j]+1;
+                        system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+
+                }
+
+
+                  if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if ( (i-3)>=0 && (i-3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                        if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
+                        {
+                        mat[i][j]='*';
+                        mat[i-1][j-1]=mat[i][j];
+                        mat[i-2][j-2]=mat[i][j];
+                        mat[i-3][j-3]=mat[i][j];
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+
+
+
+                }
+
+
+                  if ( ((i+1)>=0 && (i+1)<=6 )&& ((j+1)>=0 && (j+1)<=6) ) {
+                    if ( ((i+2)>=0 && (i+2)<=6) && ((j+2)>=0 && (j+2)<=6) ) {
+                      if ( ((i+3)>=0 && (i+3)<=6) && ((j+3)>=0 && (j+3)<=6) ) {
+                        if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
+                        {
+                        mat[i][j]='*';
+                        mat[i+1][j+1]=mat[i][j];
+                        mat[i+2][j+2]=mat[i][j];
+                        mat[i+3][j+3]=mat[i][j];
+                        system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+                }
+
+                  if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                      if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                        if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
+                        {
+                        mat[i][j]='*';
+                        mat[i-1][j-1]=mat[i][j];
+                        mat[i+1][j+1]=mat[i][j];
+                        mat[i+2][j-2]=mat[i][j];
+                        system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+                }
+
+                  if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                      if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                        if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
+                        {
+                        mat[i][j]='*';
+                        mat[i+1][j+1]=mat[i][j];
+                        mat[i-1][j-1]=mat[i][j];
+                        mat[i-2][j-2]=mat[i][j];
+                        system("clear");
+                        afficher_mat(mat);
+                          return 1;
+
+                      }
+                    }
+                  }
+                }
+
+            }
+            /* toutes les combinaison en diagonales pour le joueur jaune et retourne 2 si il a gagné */
+            if(mat[i][j] ==  'J')
+            {
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i-2)>=0 && (i-2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                    if ( (i-3)>=0 && (i-3)<=6 && (j+3)>=0 && (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
+                      {
+                      mat[i][j]='*';
+                      mat[i-1][j+1]=mat[i][j] ;
+                      mat[i-2][j+2]=mat[i][j];
+                      mat[i-3][j+3]=mat[i][j];
+                              system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                    if ( (i+3)>=0 && (i+3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
+                      {
+
+                      mat[i][j]='*';
+                      mat[i+1][j-1]=mat[i][j];
+                      mat[i+2][j-2]=mat[i][j];
+                      mat[i+3][j-3]=mat[i][j];
+                              system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i-2)>=0 && (i-2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
+                      {
+                      mat[i][j]='*';
+                      mat[i+1][j-1]=mat[i][j];
+                      mat[i-1][j+1]=mat[i][j];
+                      mat[i-2][j+2]=mat[i][j];
+                      system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
+                      {
+                      mat[i][j]='*';
+                      mat[i-1][j+1]=mat[i][j];
+                      mat[i+1][j-1]=mat[i][j];
+                      mat[i+2][j-2]=mat[i][j];
+                      system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                    if ( (i-3)>=0 && (i-3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
+                      {
+                      mat[i][j]='*';
+                      mat[i-1][j-1]=mat[i][j];
+                      mat[i-2][j-2]=mat[i][j];
+                      mat[i-3][j-3]=mat[i][j];
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i+2)>=0 && (i+2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                    if ( (i+3)>=0 && (i+3)<=6 && (j+3)>=0 && (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
+                      {
+                      mat[i][j]='*';
+                      mat[i+1][j+1]=mat[i][j];
+                      mat[i+2][j+2]=mat[i][j];
+                      mat[i+3][j+3]=mat[i][j];
+                      system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
+                      {
+                      mat[i][j]='*';
+                      mat[i-1][j-1]=mat[i][j];
+                      mat[i+1][j+1]=mat[i][j];
+                      mat[i+2][j-2]=mat[i][j];
+                      system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
+                      {
+                      mat[i][j]='*';
+                      mat[i+1][j+1]=mat[i][j];
+                      mat[i-1][j-1]=mat[i][j];
+                      mat[i-2][j-2]=mat[i][j];
+                      system("clear");
+                      afficher_mat(mat);
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+            }
+        }
+    }
+    return 0;           /* aucun gagnant dans les diagonales */
+}
+
+/**
+ * \fn void modifGagnant(char mat[N][M])
+ * \brief fonction permettant de savoir qui a gagné en modifiant les caractère R ou J par '*'
+ *
+ * \param mat la grille du jeu.
+ *
+*/
+
+
+void modif(char mat[N][M]){
+
+    parcours_ligne(mat);
+    parcours_colonne(mat);
+    parcours_diagonale(mat);
+
+}
+
+
+
+
 /**
  * \fn int gagnant_ligne(char mat[N][M])
  * \brief fonction retourne 1 si les jaunes gagnent avec les pion en lignes ou 2 si les rouges gagnent avec les pion en lignes
@@ -143,44 +823,103 @@ int gagnant_ligne(char mat[N][M]){
             /* toutes les combinaison en ligne pour le joueur rouge et retourne 1 si il a gagné */
             if(mat[i][j] == 'R')
             {
-                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j]== mat[i][j+2]))
-                {
-                    return 1;
+
+              if ((j-1)>=0 || (j-1)<=6 ) {
+                if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
+                    {
+
+                      return 1;
+                  }
                 }
-                else if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
-                {
-                    return 1;
+              }
+            }
+
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j+1)>=0 || (j+1)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
+                      {
+
+                        return 1;
+                    }
+                  }
                 }
-                else if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
-                {
-                    return 1;
+              }
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j-3)>=0 || (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
+                      {
+
+                        return 1;
+                    }
+                  }
                 }
-                else if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
-                {
-                    return 1;
+              }
+                else if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if ((j+3)>=0 || (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
+                      {
+
+                        return 1;
+                    }
+                  }
                 }
+              }
 
             }
             /* toutes les combinaison en lignes pour le joueur jaune et retourne 2 si il a gagné */
             if(mat[i][j] ==  'J')
             {
-                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
-                {
-                    return 2;
-                }
 
+              if ((j-1)>=0 || (j-1)<=6 ) {
+                if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]))
+                    {
+
+                      return 2;
+                  }
+                }
+              }
+            }
+
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j+1)>=0 || (j+1)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j+1]))
+                      {
+
+                        return 2;
+                    }
+                  }
+                }
+              }
+                else if ((j-1)>=0 || (j-1)<=6 ) {
+                  if ((j-2)>=0 || (j-2)<=6 ) {
+                    if ((j-3)>=0 || (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i][j-1]) && (mat[i][j] == mat[i][j-2]) && (mat[i][j] == mat[i][j-3]))
+                      {
+
+                        return 2;
+                    }
+                  }
+                }
+              }
+                else if ((j+1)>=0 || (j+1)<=6 ) {
+                  if ((j+2)>=0 || (j+2)<=6 ) {
+                    if ((j+3)>=0 || (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i][j+1]) && (mat[i][j] == mat[i][j+2]) && (mat[i][j] == mat[i][j+3]))
+                      {
+
+                        return 2;
+                    }
+                  }
+                }
+              }
 
             }
 
@@ -210,43 +949,105 @@ int gagnant_colonne(char mat[N][M]){
 
             /* toutes les combinaison en colonne pour le joueur rouge et retourne 1 si il a gagné */
              if(mat[i][j] == 'R')
-            {
-                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]))
-                {
-                     return 1;
-                }
-                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
-                {
-                    return 1;
-                }
-                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
-                {
-                    return 1;
-                }
-                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
-                {
-                    return 1;
-                }
-            }
+             {
+
+               if ((i-1)>=0 || (i-1)<=6 ) {
+                 if ((i+1)>=0 || (i+1)<=6 ) {
+                   if ((i+2)>=0 || (i+2)<=6 ) {
+                     if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
+                     {
+;
+                       return 1;
+                   }
+                 }
+               }
+             }
+
+                 else if ((i-1)>=0 || (i-1)<=6 ) {
+                   if ((i-2)>=0 || (i-2)<=6 ) {
+                     if ((i+1)>=0 || (i+1)<=6 ) {
+                       if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i+1][j]))
+                       {
+
+                         return 1;
+                     }
+                   }
+                 }
+               }
+                 else if ((i-1)>=0 || (i-1)<=6 ) {
+                   if ((i-2)>=0 || (i-2)<=6 ) {
+                     if ((i-3)>=0 || (i-3)<=6 ) {
+                       if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
+                       {
+
+                         return 1;
+                     }
+                   }
+                 }
+               }
+                 else if ((i+1)>=0 || (i+1)<=6 ) {
+                   if ((i+2)>=0 || (i+2)<=6 ) {
+                     if ((i+3)>=0 || (i+3)<=6 ) {
+                       if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
+                       {
+
+                         return 1;
+                     }
+                   }
+                 }
+               }
+
+             }
             /* toutes les combinaison en colonne pour le joueur jaune et retourne 2 si il a gagné */
             if(mat[i][j] ==  'J')
             {
-                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]))
-                {
-                    return 2;
+
+              if ((i-1)>=0 || (i-1)<=6 ) {
+                if ((i+1)>=0 || (i+1)<=6 ) {
+                  if ((i+2)>=0 || (i+2)<=6 ) {
+                    if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
+                    {
+
+                      return 2;
+                  }
                 }
-                if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
-                {
-                    return 2;
+              }
+            }
+
+                else if ((i-1)>=0 || (i-1)<=6 ) {
+                  if ((i-2)>=0 || (i-2)<=6 ) {
+                    if ((i+1)>=0 || (i+1)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i+1][j]))
+                      {
+
+                        return 2;
+                    }
+                  }
                 }
-                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]))
-                {
-                    return 2;
+              }
+                else if ((i-1)>=0 || (i-1)<=6 ) {
+                  if ((i-2)>=0 || (i-2)<=6 ) {
+                    if ((i-3)>=0 || (i-3)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
+                      {
+
+                        return 2;
+                    }
+                  }
                 }
-                if((mat[i][j] == mat[i-1][j]) && (mat[i][j] == mat[i-2][j]) && (mat[i][j] == mat[i-3][j]))
-                {
-                    return 2;
+              }
+                else if ((i+1)>=0 || (i+1)<=6 ) {
+                  if ((i+2)>=0 || (i+2)<=6 ) {
+                    if ((i+3)>=0 || (i+3)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j]) && (mat[i][j] == mat[i+2][j]) && (mat[i][j] == mat[i+3][j]))
+                      {
+
+                        return 2;
+                    }
+                  }
                 }
+              }
+
             }
 
         }
@@ -274,77 +1075,232 @@ int gagnant_diagonale(char mat[N][M]){
             /* toutes les combinaison en diagonales pour le joueur rouge et retourne 1 si il a gagné */
             if(mat[i][j] == 'R')
             {
-                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
-                {
-                    return 1;
+
+                  if ( ((i-1)>=0 && (i-1)<=6) && ((j+1)>=0 && (j+1)<=6) ) {
+                    if ( ((i-2)>=0 && (i-2)<=6) && ((j+2)>=0 && (j+2)<=6) ) {
+                      if ( ((i-3)>=0 && (i-3)<=6) && ((j+3)>=0 && (j+3)<=6) ) {
+                        if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
+
+
                 }
-                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
-                {
-                    return 1;
+
+
+                  if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if ( (i+3)>=0 && (i+3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                        if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
+
+
                 }
-                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
-                {
-                    return 1;
+
+                  if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                      if ( (i-2)>=0 && (i-2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                        if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
                 }
-                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
-                {
-                    return 1;
+
+                  if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                      if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                        if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
+
                 }
-                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
-                {
-                    return 1;
+
+
+                  if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if ( (i-3)>=0 && (i-3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                        if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
+
+
+
                 }
-                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
-                {
-                    return 1;
+
+
+                  if ( ((i+1)>=0 && (i+1)<=6 )&& ((j+1)>=0 && (j+1)<=6) ) {
+                    if ( ((i+2)>=0 && (i+2)<=6) && ((j+2)>=0 && (j+2)<=6) ) {
+                      if ( ((i+3)>=0 && (i+3)<=6) && ((j+3)>=0 && (j+3)<=6) ) {
+                        if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
                 }
-                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
-                {
-                    return 1;
+
+                  if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                      if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                        if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
                 }
-                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
-                {
-                    return 1;
+
+                  if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                      if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                        if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
+                        {
+
+                          return 1;
+
+                      }
+                    }
+                  }
                 }
 
             }
             /* toutes les combinaison en diagonales pour le joueur jaune et retourne 2 si il a gagné */
             if(mat[i][j] ==  'J')
             {
-                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
-                {
-                    return 2;
-                }
-                if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
-                {
-                    return 2;
-                }
-            }
 
+                if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i-2)>=0 && (i-2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                    if ( (i-3)>=0 && (i-3)<=6 && (j+3)>=0 && (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]) && (mat[i][j] == mat[i-3][j+3]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                    if ( (i+3)>=0 && (i+3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]) && (mat[i][j] == mat[i+3][j-3]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i-2)>=0 && (i-2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i-2][j+2]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i+1)>=0 && (i+1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j+1]) && (mat[i][j] == mat[i+1][j-1]) && (mat[i][j] == mat[i+2][j-2]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                    if ( (i-3)>=0 && (i-3)<=6 && (j-3)>=0 && (j-3)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]) && (mat[i][j] == mat[i-3][j-3]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i+2)>=0 && (i+2)<=6 && (j+2)>=0 && (j+2)<=6 ) {
+                    if ( (i+3)>=0 && (i+3)<=6 && (j+3)>=0 && (j+3)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]) && (mat[i][j] == mat[i+3][j+3]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                  if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                    if ( (i+2)>=0 && (i+2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if((mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i+2][j+2]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+
+                if ( (i+1)>=0 && (i+1)<=6 && (j+1)>=0 && (j+1)<=6 ) {
+                  if ( (i-1)>=0 && (i-1)<=6 && (j-1)>=0 && (j-1)<=6 ) {
+                    if ( (i-2)>=0 && (i-2)<=6 && (j-2)>=0 && (j-2)<=6 ) {
+                      if((mat[i][j] == mat[i+1][j+1]) && (mat[i][j] == mat[i-1][j-1]) && (mat[i][j] == mat[i-2][j-2]))
+                      {
+
+                        return 2;
+
+                    }
+                  }
+                }
+              }
+            }
         }
     }
     return 0;           /* aucun gagnant dans les diagonales */
@@ -352,7 +1308,7 @@ int gagnant_diagonale(char mat[N][M]){
 
 
 /**
- * \fn int gagnant_colonne(char mat[N][M])
+ * \fn int qui_gagne(char mat[N][M])
  * \brief fonction retourne 1 si les jaunes  ou 2 si les rouges
  *
  * \param mat la grille du jeu.
@@ -364,9 +1320,9 @@ int gagnant_diagonale(char mat[N][M]){
 int qui_gagne(char mat[N][M]){
 /* fonction permettant de savoir qui a gagné en ayant 4 piece alignées. */
 
-    int lig ;
-    int col;
-    int diag;
+    int lig=0;
+    int col=0;
+    int diag=0;
 
     lig = gagnant_ligne(mat);
 
@@ -404,7 +1360,8 @@ int qui_gagne(char mat[N][M]){
             }
             else                    /* si il n'y a pas de gagnant avec un alignement en diagonale */
             {
-                return 0;           /* égalité aucun joueur n'a gagné */
+
+            return 0;    /* égalité aucun joueur n'a gagné */
             }
         }
     }
@@ -413,29 +1370,29 @@ int qui_gagne(char mat[N][M]){
 
 /**
  * \fn void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2)
- * \brief fonction qui permet de jouer a 1vs1 en mode normal
+ * \brief fonction qui permet de jouer a 1vs1 en mode normal et retourne une lettre qui designe qui a gagné (r ou j)
  *
  * \param mat la grille du jeu.
  * \param j2 joueur 2.
  * \param j1 joueur 1.
  *
+ * \return char
 */
 
 
-void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
+int JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
 
 double y=0;
 int tmp = 0;
 initMatrice(mat);
 
-printf("\033[H\033[2J");
 afficher_mat(mat);
 printf("\n\n");
 
 j1.couleur="rouge";
 j2.couleur="jaune";
 
- while( qui_gagne(mat)==0){        // tant qu'il n'y a pas de gangnant on continue de jouer
+ while( qui_gagne(mat)==0){
 
   // tour du premier joueur de jouer
 
@@ -499,24 +1456,28 @@ j2.couleur="jaune";
     inserer(y,statut(y,mat),j2,mat);
 
     if (grille_plein(mat)) {
-      printf("La grille est pleine match null \n");
+      printf("LA GRILLE EST PLEINE : MATCH NULL \n");
       break;
     }
 
     system("clear");
 
-    printf("\033[H\033[2J");
     afficher_mat(mat);
     printf("\n\n");
 
   }
 
- }
+ } // tant qu'il n'y a pas de gangnant on continue de jouer
 
   if(qui_gagne(mat)==1){
-    printf("le joueur qui a les rouges a gagné \n");
+    modif(mat);
+    printf("LES ROUGES ONT GAGNÉS !! \n");
+    return(1);
   }
   else if(qui_gagne(mat)==2){
-    printf("le joueur qui a les jaunes a gagné \n");
+    modif(mat);
+    printf("LES JAUNES ONT GAGNÉS !! \n");
+    return(0);
   }
+
 }
