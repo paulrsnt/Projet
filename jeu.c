@@ -101,7 +101,19 @@ while(x!=3){
   else if (x==3) {
     joueur j3,j4;
     piece p;
-    Jouer2vs2(mat,j1,j2,j3,j4,p);
+   
+    int y=0;
+    while (y!=2) {
+
+      /* Jouer2vs2(mat,j1,j2,j3,j4,p);*/
+      printf("\n\n");
+      printf("Voulez vous rejouer ?\n");
+      do {
+        printf("Taper 1 pour rejouer, taper 2 pour quitter ce mode \n");
+        scanf("%d",&y);
+        system("clear");
+      } while((y!=1)&&(y!=2));
+    }
   }
 
 
