@@ -7,7 +7,7 @@
 *
 * \file jeu.c
 * \brief Programme permettant de jouer au puissance 4++
-* \author Aaron Amani Oussama Belkadi Fathi et Paul riga
+* \author Aaron Amani Oussama Belkadi Fatih Ufacik et Paul riga
 * \version 1.0
 * \date 17 fevrier 2020
 *
