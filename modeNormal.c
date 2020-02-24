@@ -6,7 +6,7 @@
 
 * \file modeNormal.c
 * \brief Programme contenant les fonctions du jeu normal 1vs1 en local 4++
-* \author Aaron Amani Oussama Belkadi Fathi et Paul riga
+* \author Aaron Amani Oussama Belkadi Fatih Ufacik et Paul riga
 * \version 1.0
 * \date 17 fevrier 2020
 
