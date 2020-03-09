@@ -2,48 +2,60 @@
 #include <stdlib.h>
 #include "structD.h"
 
-int statut2v2(int y, char mat[N][M], piece p){
+int statut(int y, char mat[N][M], piece p){
 
 	int x=0;
-   /* on arrive au bout tant que l'emplacement est pris on remonte */
+	int place;
+	/* on arrive au bout tant que l'emplacement est pris on remonte */
 
 /*	 for (x = N ;(x < 0 || (mat[x][y]=="RP"||mat[x][y]=="RC"||mat[x][y]=="RB"||mat[x][y]=="JC"||mat[x][y]=="JB"||mat[x][y]=="JP")); x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte return x ;
 */
-
-
-	if(p==1){
-		if(mat[x][y]!=('o')){
+	if(piece p==1){ //piece bloqaunte
+		if(mat[x][y]!=("o")){
 			return -1;
 		}
 		else{
-			for (y=M ; (mat[x][y]!=('o')) || (y > 0) ; y--) ;
+			for (y=M-1 ; (mat[x][y]!=(" ")) || (y > 0) ; y--) ;
   			return y;
 		}
 
   	}
-  	else if( p==2){
+
+
+
+  	else if(piece p==2){ //piece creuse
   		y=0;
-		if(mat[x][y]!=('o')||mat[x][y]!=("RP")||mat[x][y]!=("JP")){
+		if(mat[x][y]!=("o")||mat[x][y]!=("RB")||mat[x][y]!=("JB")||mat[x][y]!=("JC")||mat[x][y]!=("RC")){
 			return -1;
 		}
 		else {
-			for(y=M ; ( mat[x][y]!=('o') || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
-			return y;
+			for(y=M-1 ; ( mat[x][y]!=("o") || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y > 0) ; y--);
+			place = y;
+			y=0;
+			for(y=0 ; ( mat[x][y]!=("o") || mat[x][y]!=("RP") || mat[x][y]!=("JP") ) || (y < M-1) ; y++);
+			if (y==place){
+				return y
+			}
+			else return place;
 		}
-  		return y;
+
 
   	}              /* sinon on retourne -1 */
 
-  	else if( p==3){
+  	else if (piece p==3){ //piece pleine
   		y=0;
-		if(mat[x][y]!=('o')||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
+		if(mat[x][y]!=("o")||mat[x][y]!=("RC")||mat[x][y]!=("JC")){
 			return -1;
 		}
 		else {
-			for(y=M ; ( mat[x][y]!=('o') || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
-			return x;
-		}
-  		return x;
+			for(y=M-1 ; ( mat[x][y]!=("o") || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y > 0) ; y--);
+			place = y;
+			y=0;
+			for(y=0 ; ( mat[x][y]!=("o") || mat[x][y]!=("RC") || mat[x][y]!=("JC") ) || (y < M-1) ; y++);
+			if (y==place){
+				return y
+			}
+			else return place;
 
   	}
 
