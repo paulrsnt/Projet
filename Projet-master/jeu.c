@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "structD.h"
-#include "2v2.h"
+#include "V2.h"
 
 
 
@@ -35,7 +35,7 @@ printf("###############################\n");
 
 printf("CHOISISSEZ UN MODE DE JEU : \n\n");
 
-while(x!=3){
+while(x!=4){
 
   do {
     printf("LOCAL 1 VS 1 : Appuyer sur la touche 1 \n\n");
@@ -62,13 +62,14 @@ while(x!=3){
     int rouge=0,jaune=0;
     int y=0;
     while (y!=2) {
-
-      if (JouerNormal1vs1(mat,j1,j2)==1) {
+      int gagnant=JouerNormal1vs1(mat,j1,j2);
+      if (gagnant==1) {
         rouge++;
       }
-      else{
+      else if (gagnant==2){
         jaune++;
       }
+
       printf("\n\n");
       printf("Rouge : %d \n",rouge);
       printf("\n\n");
@@ -91,11 +92,11 @@ while(x!=3){
     joueur j1,ia;
     int y=0;
     while (y!=2) {
-
-      if (JouerNormal1vsIA(mat,j1,ia)==1) {
+      int gagnant=JouerNormal1vsIA(mat,j1,ia);
+      if (gagnant==1) {
         rouge++;
       }
-      else{
+      else if (gagnant==2) {
         jaune++;
       }
       printf("\n\n");
@@ -116,16 +117,17 @@ while(x!=3){
 
 
   else if(x==3){
-      piece p;
+      int p;
       joueur j1,j2,j3,j4;
       int rouge=0,jaune=0;
       int y=0;
       while (y!=2) {
+        int gagnant=JouerNormal2v2(mat,mat2,j1,j2,j3,j4,p);
 
-        if (JouerNormal2v2(mat2,j1,j2,j3,j4,p)==1) {
+        if (gagnant==1) {
           rouge++;
         }
-        else{
+        else if (gagnant==2){
           jaune++;
         }
         printf("\n\n");

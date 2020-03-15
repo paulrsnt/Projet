@@ -1,11 +1,11 @@
-main : structD.o 2v2.o jeu.o
-	gcc structD.o 2v2.o jeu.o  -o jeu ; ./jeu
+main : structD.o V2.o jeu.o
+	gcc structD.o V2.o jeu.o  -o jeu ; ./jeu
 
 structD.o : structD.c structD.h
 		gcc -c structD.c
 
-2v2.o : 2v2.c 2v2.h
-	gcc -c 2v2.c
+V2.o : V2.c V2.h
+	gcc -c V2.c
 
 jeu.o : jeu.c
-	gcc -c jeu.c 
+	gcc -c jeu.c

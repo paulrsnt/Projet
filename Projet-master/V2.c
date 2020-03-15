@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 #include "structD.h"
+
+
+
+//
+//
+// RC=1; RP=3 ;
+//
+// JC=2; JP=4 ;
+//
+//
+// Blocante = mur appeller B dans la grille
+//
+// B = 5
+//
+
 /**
 
 * \file structD.h
@@ -25,11 +40,11 @@
  * \return int.
 */
 extern
-int grille_plein(char mat[N][M]){
+int grille_plein2v2(char mat[N][M]){
   int cpt=0;
   for (int i = 1; i < N; i++) {
     for (int y = 0; y < M; y++) {
-      if (mat[i][y]=='R'||mat[i][y]=='J');
+      if (mat[i][y]=='R'||mat[i][y]=='J'||mat[i][y]=='B');
       else{
         return 0;
       }
@@ -47,13 +62,34 @@ int grille_plein(char mat[N][M]){
  *
  * \return int.
 */
+
 extern
-int statut(int y, char mat[N][M]){
+int statut2v2(int y, char mat[N][M],int p){
+
   int x;
 
-  for (x = N-1 ;(x < 0 || (mat[x][y]=='R'||mat[x][y]=='J' )); x--) ; /* on arrive au bout tant que l'emplacement est pris on remonte */
+  /* for (x = N-1 ;(x < 0 || (mat[x][y]=='R'||mat[x][y]=='J' )); x--) ;  on arrive au bout tant que l'emplacement est pris on remonte */
 
-    return x ;
+  if (p==1 || p==2) { /* int bloquante */
+
+    for (x = N-1 ;( (mat[x][y]!=' ' ) && (x >= 0) )  ; x--) ;
+  }
+
+  else if (p==3) { /* int pleine */
+
+    for (x = 0 ;  (x < N-1) && ((mat[x][y]!='B')&&(mat[x][y]!='P') )  ; x++);
+
+    if ((mat[x][y]=='B')||(mat[x][y]=='P')) {
+      x--;
+    }
+    if (mat[x][y]=='*') {
+
+      return -1;
+    }
+
+  }
+
+  return x ;
 
 }
 
@@ -66,7 +102,7 @@ int statut(int y, char mat[N][M]){
  *
 */
 extern
-void initMatrice(char mat[N][M]){
+void initMatrice2v2(char mat[N][M]){
 /* fonction qui permet de initialiser la matrice */
 	int i,j;
 
@@ -91,9 +127,9 @@ void initMatrice(char mat[N][M]){
  *
 */
 extern
-void afficher_mat(char mat[N][M]){
+void afficher_mat2v2(char mat[N][M]){
     int i, j;
-    for(i=1;i<N;i++){
+    for(i=0;i<N;i++){
         for(j=0;j<M;j++){
             printf("| %c |", mat[i][j]);
         }
@@ -114,14 +150,36 @@ void afficher_mat(char mat[N][M]){
  *
 */
 extern
-void inserer(int y, int x, joueur t, char mat[N][M]){
+void inserer2v2(int y, int x, joueur t, char mat[N][M], char mat2[N][M],int p){
 /* fonction qui permet de insérer un epièce dans la matrice */
-  if (t.couleur=="rouge") {
-    mat[x][y]='R';
+
+
+  if (p==1) {
+    mat2[x][y]='B';
+    mat[x][y]='B';
   }
-  else if (t.couleur=="jaune") {
+  else if (p==2 && t.couleur=="jaune") {
+    mat2[x][y]='C';
+    mat[x][y]='J';
+
+  }
+  else if (p==3 && t.couleur=="jaune") {
+    mat2[x][y]='P';
     mat[x][y]='J';
   }
+
+  else if (p==2 && t.couleur=="rouge") {
+    mat2[x][y]='C';
+    mat[x][y]='R';
+
+  }
+
+  else if (p==3 && t.couleur=="rouge") {
+    mat2[x][y]='P';
+    mat[x][y]='R';
+  }
+
+
 
 }
 
@@ -135,10 +193,10 @@ void inserer(int y, int x, joueur t, char mat[N][M]){
  * \return int.
 */
 extern
-int parcours_ligne(char mat[N][M]){
+int parcours_ligne2v2(char mat[N][M]){
 /* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
     int i, j;
-    for (i = 0; i < N; i++)
+    for (i = 1; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
@@ -300,11 +358,11 @@ int parcours_ligne(char mat[N][M]){
  * \return int.
 */
 extern
-int parcours_colonne(char mat[N][M]){
+int parcours_colonne2v2(char mat[N][M]){
 /* fonction qui vérifie si il y a un gagnant sur les colonnes du plateau de jeu */
     int i, j;
 
-    for (i = 0; i < N; i++)
+    for (i = 1; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
@@ -467,10 +525,10 @@ int parcours_colonne(char mat[N][M]){
 */
 
 extern
-int parcours_diagonale(char mat[N][M]){
+int parcours_diagonale2v2(char mat[N][M]){
 /* fonction qui verifie si il y a un gagnant sur les diagonales du plateau de jeu */
     int i, j;
-    for (i = 0; i < N; i++)
+    for (i = 1; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
@@ -796,11 +854,11 @@ int parcours_diagonale(char mat[N][M]){
 */
 
 extern
-void modif(char mat[N][M]){
+void modif2v2(char mat[N][M]){
 
-    parcours_ligne(mat);
-    parcours_colonne(mat);
-    parcours_diagonale(mat);
+    parcours_ligne2v2(mat);
+    parcours_colonne2v2(mat);
+    parcours_diagonale2v2(mat);
 
 }
 
@@ -816,10 +874,10 @@ void modif(char mat[N][M]){
  * \return int.
 */
 extern
-int gagnant_ligne(char mat[N][M]){
+int gagnant_ligne2v2(char mat[N][M]){
 /* fonction verifiant si il y a un gagnant sur une ligne du plateau de jeu */
     int i, j;
-    for (i = 0; i < N; i++)
+    for (i = 1; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
@@ -941,11 +999,11 @@ int gagnant_ligne(char mat[N][M]){
  * \return int.
 */
 extern
-int gagnant_colonne(char mat[N][M]){
+int gagnant_colonne2v2(char mat[N][M]){
 /* fonction qui vérifie si il y a un gagnant sur les colonnes du plateau de jeu */
     int i, j;
 
-    for (i = 0; i < N; i++)
+    for (i = 1; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
@@ -1068,10 +1126,10 @@ int gagnant_colonne(char mat[N][M]){
 */
 
 extern
-int gagnant_diagonale(char mat[N][M]){
+int gagnant_diagonale2v2(char mat[N][M]){
 /* fonction qui verifie si il y a un gagnant sur les diagonales du plateau de jeu */
     int i, j;
-    for (i = 0; i < N; i++)
+    for (i = 1; i < N; i++)
     {
         for(j = 0; j < M; j++)
         {
@@ -1320,14 +1378,14 @@ int gagnant_diagonale(char mat[N][M]){
 */
 
 extern
-int qui_gagne(char mat[N][M]){
+int qui_gagne2v2(char mat[N][M]){
 /* fonction permettant de savoir qui a gagné en ayant 4 piece alignées. */
 
     int lig=0;
     int col=0;
     int diag=0;
 
-    lig = gagnant_ligne(mat);
+    lig = gagnant_ligne2v2(mat);
 
     if(lig == 1)
     {
@@ -1339,7 +1397,7 @@ int qui_gagne(char mat[N][M]){
     }
     else                        /* si il n'y a pas de gagnant avec un alignement en ligne on regarde les collonnes */
     {
-        col = gagnant_colonne(mat);
+        col = gagnant_colonne2v2(mat);
 
         if(col == 1)
         {
@@ -1351,7 +1409,7 @@ int qui_gagne(char mat[N][M]){
         }
         else                    /* si il n'y a pas de gagnant avec un alignement en collonne on regarde les diagonales */
         {
-            diag = gagnant_diagonale(mat);
+            diag = gagnant_diagonale2v2(mat);
 
             if(diag == 1)
             {
@@ -1385,244 +1443,251 @@ int qui_gagne(char mat[N][M]){
 */
 
 extern
-int JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2){
+int JouerNormal2v2(char mat[N][M],char mat2[N][M], joueur j1, joueur j2, joueur j3, joueur j4,int p){
 
-double y=0;
-int tmp = 0;
-initMatrice(mat);
+  int pc ;
+  double y=0;
+  int tmp = 0;
 
-afficher_mat(mat);
-printf("\n\n");
+  initMatrice2v2(mat);
+  initMatrice2v2(mat2);
 
-j1.couleur="rouge";
-j2.couleur="jaune";
+  afficher_mat2v2(mat2);
+  printf("\n");
+  afficher_mat2v2(mat2);
 
- while( qui_gagne(mat)==0){
-
-  // tour du premier joueur de jouer
-
-  do{
-	 while(1){              /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
-       	   printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");
-           scanf("%lf",&y);
-           tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
-           if(tmp == y){
-             break;             /* on sort de la boucle si c'est un nombre entier */
-           }
-           else{
-             printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
-           }
-         }
-
-  	 if (statut(y-1,mat)==0) {
-    	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
-  	 }
-
-  }while ((y<1||y>7) || statut(y-1,mat)==0);
-  y--;
-
-  inserer(y,statut(y,mat),j1,mat);                          //on insere la piece
-
-  if (grille_plein(mat)) {
-    printf("La grille est pleine match null \n");
-    return(3);
-  }
-
-  system("clear");
-
-  afficher_mat(mat);
   printf("\n\n");
 
-  if(qui_gagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+  j1.couleur="rouge";
+  j2.couleur="jaune";
+  j3.couleur="rouge";
+  j4.couleur="jaune";
 
-    // tour du deuxieme joueur de jouer
-    y=0;
+   while( qui_gagne2v2(mat)==0){
+
+    // tour du premier joueur de jouer
 
     do{
-	while(1){              /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
-         printf("Joueur2 : Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");    //rajouter cas y n'est pas un chiffre
-         scanf("%lf",&y);
-         tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire */
-         if(tmp == y){
-           break;             /* on sort de la boucle si c'est un nombre entier */
-         }
-         else{
-           printf("Veuillez saisir un entier\n"); /* sinon on redemande à l'utilisateur de saisir un nombre entier */
-         }
-       	}
+  	 while(1){
+            printf("Joueur 1 :Choisissez type de piece  : 1 bloquante, 2 creuse, 3 pleine ):\n");
+            scanf("%d",&pc);
 
-       if (statut(y-1,mat)==0) {
-         printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
-       }
+                   /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
+         	   printf("Joueur 1 :Choisissez ou vous aller mettre votre int (numero de colonne entre 1 et 7):\n");
+             scanf("%lf",&y);
+             tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
+             if(tmp == y){
+               break;             /* on sort de la boucle si c'est un nombre entier */
+             }
+             else{
+               printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
+             }
+           }
 
-    }while ((y<1||y>7) || statut(y-1,mat)==0);
+    	 if (statut2v2(y-1,mat2,p)==-1) {
+      	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
+    	 }
+
+    }while ((y<1||y>7) || statut2v2(y-1,mat2,p)==-1 || (pc<1||pc>3) );
     y--;
 
-    inserer(y,statut(y,mat),j2,mat);
+    if (pc==1) {
+      p=1;
+    }
+    if (pc==2) {
+      p=2;
+    }
+    if (pc==3) {
+      p=3;
+    }
 
-    if (grille_plein(mat)) {
+    inserer2v2(y,statut2v2(y,mat2,p),j1,mat,mat2,p);                          //on insere la int
+
+    if (grille_plein2v2(mat)) {
       printf("LA GRILLE EST PLEINE : MATCH NULL \n");
       return(3);
     }
 
     system("clear");
 
-    afficher_mat(mat);
+    afficher_mat2v2(mat);
+    printf("\n");
+    afficher_mat2v2(mat2);
+
     printf("\n\n");
 
-  }
+    if(qui_gagne2v2(mat)!=1){
 
- } // tant qu'il n'y a pas de gangnant on continue de jouer
+      // tour du deuxieme joueur de jouer
+      y=0;
 
-  if(qui_gagne(mat)==1){
-    modif(mat);
-    printf("LES ROUGES ONT GAGNÉS !! \n");
-    return(1);
-  }
-  else if(qui_gagne(mat)==2){
-    modif(mat);
-    printf("LES JAUNES ONT GAGNÉS !! \n");
-    return(0);
-  }
+      do{
+    	 while(1){
+              printf("Joueur 2 :Choisissez type de piece  : 1 bloquante, 2 creuse, 3 pleine ):\n");
+              scanf("%d",&pc);
 
-}
+                     /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
+           	   printf("Joueur 2 :Choisissez ou vous aller mettre votre int (numero de colonne entre 1 et 7):\n");
+               scanf("%lf",&y);
+               tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
+               if(tmp == y){
+                 break;             /* on sort de la boucle si c'est un nombre entier */
+               }
+               else{
+                 printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
+               }
+             }
 
+      	 if (statut2v2(y-1,mat2,p)==-1) {
+        	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
+      	 }
 
+      }while ((y<1||y>7) || statut2v2(y-1,mat2,p)==-1 || (pc<1||pc>3) );
+      y--;
 
+      if (pc==1) {
+        p=1;
+      }
+      if (pc==2) {
+        p=2;
+      }
+      if (pc==3) {
+        p=3;
+      }
 
-/**
- * \fn void insererIA(int y, int x, joueur t, char mat[N][M])
- * \brief fonction qui permet a l'utilisateur d'inserer une piece
- *
- * \param ia structure representant le joueur
- * \param mat la grille du jeu.
- *
- *
-*/
+      inserer2v2(y,statut2v2(y,mat2,p),j2,mat,mat2,p);                          //on insere la int
 
-extern
-void insererIA(joueur ia, char mat[N][M],int p){
-/* fonction qui permet a une IA de insérer un epièce dans la matrice */
-  int y=0 ,x=-1;
-  const int MAX = (p+1) , MIN = (p-1) ;
+      if (grille_plein2v2(mat)) {
+        printf("LA GRILLE EST PLEINE : MATCH NULL \n");
+        return(3);
+      }
 
-// Génération du nombre aléatoire
+      system("clear");
 
-while (x==-1) {
-
-  do {
-    srand(time(NULL));
-    y = (rand() % (MAX - MIN ) + MIN);
-  } while(y<0||y>6);
-
-  x = statut(y,mat);
-}
-
-  if (ia.couleur=="rouge") {
-    mat[x][y]='R';
-  }
-  else if (ia.couleur=="jaune") {
-    mat[x][y]='J';
-  }
-
-}
-
-
-
-
-/**
- * \fn void JouerNormal1vs1(char mat[N][M], joueur j1, joueur j2)
- * \brief fonction qui permet de jouer a 1vs1 en mode normal et retourne une lettre qui designe qui a gagné (r ou j)
- *
- * \param mat la grille du jeu.
- *
- * \param j1 joueur 1.
- *
- * \return int
-*/
-
-
-extern int JouerNormal1vsIA(char mat[N][M], joueur j1, joueur ia){
-
-double y=0;
-int tmp = 0;
-int m=1;
-initMatrice(mat);
-
-afficher_mat(mat);
-printf("\n\n");
-
-j1.couleur="rouge";
-ia.couleur="jaune";
-
- while( qui_gagne(mat)==0){
-   y=0;
-  // tour du premier joueur de jouer
-
-  do{
-	 while(1){              /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
-       	   printf("Joueur 1 :Choisissez ou vous aller mettre votre piece (numero de colonne entre 1 et 7):\n");
-           scanf("%lf",&y);
-           tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
-           if(tmp == y){
-             break;             /* on sort de la boucle si c'est un nombre entier */
-           }
-           else{
-             printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
-           }
-         }
-
-  	 if (statut(y-1,mat)==0) {
-    	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
-  	 }
-
-  }while ((y<1||y>7) || statut(y-1,mat)==0);
-  y--;
-
-  inserer(y,statut(y,mat),j1,mat);                          //on insere la piece
-
-  system("clear");
-
-  afficher_mat(mat);
-  printf("\n\n");
-
-  if (grille_plein(mat)) {
-    printf("LA GRILLE EST PLEINE : MATCH NULL \n");
-    return(3);
-  }
-
-
-  if(qui_gagne(mat)!=1){                              // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
-
-    // tour de l'IA de jouer
-
-
-    insererIA(ia,mat,y);
-
-    system("clear");
-
-    afficher_mat(mat);
-    printf("\n\n");
-
-    if (grille_plein(mat)) {
-      printf("LA GRILLE EST PLEINE : MATCH NULL \n");
-      return(3);
+      afficher_mat2v2(mat);
+        printf("\n");
+      afficher_mat2v2(mat2);
+      printf("\n\n");
     }
 
-  }
+    if(qui_gagne2v2(mat)!=1){
 
- } // tant qu'il n'y a pas de gangnant on continue de jouer
+        // tour du deuxieme joueur de jouer
+        y=0;
 
-  if(qui_gagne(mat)==1){
-    modif(mat);
-    printf("LES ROUGES ONT GAGNÉS !! \n");
-    return(1);
-  }
-  else if(qui_gagne(mat)==2){
-    modif(mat);
-    printf("LES JAUNES (IA) ONT GAGNÉS !! \n");
-    return(0);
-  }
+        do{
+      	 while(1){
+                printf("Joueur 3 :Choisissez type de piece  : 1 bloquante, 2 creuse, 3 pleine ):\n");
+                scanf("%d",&pc);
 
+                       /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
+             	   printf("Joueur 3 :Choisissez ou vous aller mettre votre int (numero de colonne entre 1 et 7):\n");
+                 scanf("%lf",&y);
+                 tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
+                 if(tmp == y){
+                   break;             /* on sort de la boucle si c'est un nombre entier */
+                 }
+                 else{
+                   printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
+                 }
+               }
+
+        	 if (statut2v2(y-1,mat2,p)==-1) {
+          	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
+        	 }
+
+        }while ((y<1||y>7) || statut2v2(y-1,mat2,p)==-1 || (pc<1||pc>3) );
+        y--;
+
+        if (pc==1) {
+          p=1;
+        }
+        if (pc==2) {
+          p=2;
+        }
+        if (pc==3) {
+          p=3;
+        }
+
+        inserer2v2(y,statut2v2(y,mat2,p),j3,mat,mat2,p);                          //on insere la int
+
+        if (grille_plein2v2(mat)) {
+          printf("LA GRILLE EST PLEINE : MATCH NULL \n");
+          return(3);
+        }
+
+        system("clear");
+
+        afficher_mat2v2(mat);
+          printf("\n");
+        afficher_mat2v2(mat2);
+        printf("\n\n");} // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+
+    if(qui_gagne2v2(mat)!=1){
+
+        // tour du deuxieme joueur de jouer
+        y=0;
+
+        do{
+      	 while(1){
+                printf("Joueur 4 :Choisissez type de piece  : 1 bloquante, 2 creuse, 3 pleine ):\n");
+                scanf("%d",&pc);
+
+                       /* verifie si le nombre entrée est bien un nombre entier et pas un nombre décimale */
+             	   printf("Joueur 4 :Choisissez ou vous aller mettre votre int (numero de colonne entre 1 et 7):\n");
+                 scanf("%lf",&y);
+                 tmp = (int)y;        /* on donne la valeur entière du nombre saisi (peut être aussi un nombre décimal) à la variable temporaire*/
+                 if(tmp == y){
+                   break;             /* on sort de la boucle si c'est un nombre entier */
+                 }
+                 else{
+                   printf("Veuillez saisir un entier\n");     /* sinon on redemande à l'utilisateur de saisir un nombre entier */
+                 }
+               }
+
+        	 if (statut2v2(y-1,mat2,p)==-1) {
+          	  printf("Erreur sur les coordonnée des y : la colonne %lf est rempli essayer une autre \n\n", y);
+        	 }
+
+        }while ((y<1||y>7) || statut2v2(y-1,mat2,p)==-1 || (pc<1||pc>3) );
+        y--;
+
+        if (pc==1) {
+          p=1;
+        }
+        if (pc==2) {
+          p=2;
+        }
+        if (pc==3) {
+          p=3;
+        }
+
+        inserer2v2(y,statut2v2(y,mat2,p),j4,mat,mat2,p);                          //on insere la int
+
+        if (grille_plein2v2(mat)) {
+          printf("LA GRILLE EST PLEINE : MATCH NULL \n");
+          return(3);
+        }
+
+        system("clear");
+
+        afficher_mat2v2(mat);
+          printf("\n");
+        afficher_mat2v2(mat2);
+        printf("\n\n");} // on passe au tour suivant si et selement si le joueur 1 n'a pas gagner
+
+   }
+   // tant qu'il n'y a pas de gangnant on continue de jouer
+
+    if(qui_gagne2v2(mat)==1){
+      modif2v2(mat);
+      printf("LES ROUGES ONT GAGNÉS !! \n");
+      return(1);
+    }
+    else if(qui_gagne2v2(mat)==2){
+      modif2v2(mat);
+      printf("LES JAUNES ONT GAGNÉS !! \n");
+      return(0);
+    }
 
 }

@@ -20,7 +20,7 @@
 
 
 char mat[N][M];
-int mat2[N][M];
+char mat2[N][M]; 
 
 /**
 * \struct joueurs_s
@@ -33,13 +33,6 @@ typedef struct joueurs_s {
   char * couleur;
 
 }joueur ;
-
-/**
-* \enum piece_s
-* \brief stucture enumeration piece afin de definir le type de la piece
-*
-*/
-typedef enum piece_s {bloquante,creuse,pleine} piece;
 
 
 /**
