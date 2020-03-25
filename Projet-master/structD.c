@@ -1501,7 +1501,7 @@ j2.couleur="jaune";
 */
 
 extern
-void insererIA(joueur ia, char mat[N][M],int p){
+void insererIA(joueur ia, char mat[N][M]){
   int i,j,ia_joue=0;
   int y;//CASE du tableau
   char *coul;
@@ -1873,7 +1873,7 @@ ia.couleur="jaune";
     // tour de l'IA de jouer
 
 
-    insererIA(ia,mat,y);
+    insererIA(ia,mat);
 
     system("clear");
 
