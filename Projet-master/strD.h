@@ -15,12 +15,12 @@
 
 */
 
-#define N  7
-#define M  7
+#define N  8
+#define M  9
 
 
 char mat[N][M];
-char mat2[N][M]; 
+char mat2[N][M];
 
 /**
 * \struct joueurs_s
