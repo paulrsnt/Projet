@@ -107,7 +107,7 @@ extern void inserer(int y, int x, joueur t, char mat[N][M]);
  *
 */
 
-extern void insererIA(joueur ia, char mat[N][M],int p);
+extern void insererIA(joueur ia, char mat[N][M]);
 
 
 /**
