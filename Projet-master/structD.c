@@ -1502,8 +1502,284 @@ j2.couleur="jaune";
 
 extern
 void insererIA(joueur ia, char mat[N][M],int p){
-/* fonction qui permet a une IA de insérer un epièce dans la matrice */
-  int y=0 ,x=-1;
+  int i,j,ia_joue=0;
+  int y;//CASE du tableau
+  char *coul;
+ /* Attaque */
+ for(i=1;i!=N-1;i++){
+      for(j=1;j!=N-1;j++){
+          //TEST LIGNE (3 jetons)
+          if('R' == mat[i][j] && 'R' == mat[i][j+1] &&'R' == mat[i][j+2] && ia_joue==0){
+              if (i==7 && (mat[i][j+3] == ' ')){
+                  inserer(j+3,statut(j+3,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+              else if (i==7 && j>1 && (mat[i][j-1] == ' ')){
+                  inserer(j-1,statut(j-1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+              else if (i<7 && (mat[i][j+3] == ' ') && (mat[i-1][j+3] != ' ')){
+                  inserer(j+3,statut(j+3,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+          }
+
+          //TEST COLONNE
+          //'R' 3 jetons
+          else if('R' == mat[i][j] && 'R' == mat[i+1][j] && 'R' == mat[i+2][j] && ia_joue==0){
+              if (mat[i+3][j] == ' '){
+                  inserer(j,statut(j,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                  }
+          }
+
+          //TEST 1ere DIAGONNALE
+          else if('R' == mat[i][j] && 'R' == mat[i+1][j+1] &&'R' == mat[i+2][j+2] && ia_joue==0){
+            if (i+3==N && mat[i+3][j+3] == ' ' ){
+                inserer(j+3,statut(j+3,mat),ia,mat);
+                ia_joue=1;
+                break;
+            }
+            else if(i+3<N && mat[i+4][j+3] != ' ' && mat[i+3][j+3] == ' '){
+              inserer(j+3,statut(j+3,mat),ia,mat);
+              ia_joue=1;
+              break;
+            }
+            else if (mat[i-1][j-1] == ' ' && mat[i][j-1] !=' '){
+                inserer(j-1,statut(j-1,mat),ia,mat);
+                ia_joue=1;
+                break;
+            }
+
+          }
+      }
+  }
+
+
+  for(j=1;j!=N-1;j++){
+      for(i=N-1;i>=1;i--){
+          //TEST 2eme Diagonnale
+          if('R' == mat[i][j] &&'R' == mat[i-1][j+1] &&'R' == mat[i-2][j+2]&& ia_joue==0){
+              if (mat[i-3][j+3] == ' ' && mat[i-2][j+3] !=' '){
+                  inserer(j+3,statut(j+3,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+              else if ((i+1)==N && mat[i+1][j-1] == ' '){
+                  inserer(j-1,statut(j-1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+              else if ((i+1)<N && mat[i+1][j-1] == ' '&&mat[i+2][j-1] != ' ' ){
+                  inserer(j-1,statut(j-1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+          }
+
+      }
+  }
+
+  /* DEFENSE */
+  for(i=1;i!=N-1;i++){
+      for(j=1;j!=N-1;j++){
+          //TEST ligne (3 jetons)
+          if('J' == mat[i][j] && 'J' == mat[i][j+1] &&'J' == mat[i][j+2] && ia_joue==0){
+            if (i==1){
+              if(mat[i][j+3] == ' '){
+                inserer(j+3,statut(j+3,mat),ia,mat);
+                ia_joue=1;
+                break;
+              }
+              else if(mat[i][j-1] == ' '){
+                inserer(j-1,statut(j-1,mat),ia,mat);
+                ia_joue=1;
+                break;
+              }
+            }
+            else if (i>1){
+              if((mat[i][j+3] == ' ') && (mat[i-1][j+3] != ' ')){
+                  inserer(j+3,statut(j+3,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+            }
+              else if((mat[i][j-1] == ' ') && (mat[i-1][j-1] != ' ')){
+                inserer(j-1,statut(j-1,mat),ia,mat);
+                ia_joue=1;
+                break;
+              }
+            }
+          }
+
+          //TEST colonne
+          //'J'3 jetons
+          else if('J' == mat[i][j] && 'J' == mat[i+1][j] && 'J' == mat[i+2][j] && ia_joue==0){
+              if (mat[i+3][j] == ' '){
+                  inserer(j+3,statut(j+3,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                  }
+
+          }
+
+          //TEST 1ere DIAGONNALE
+          else if('J' == mat[i][j] && 'J' == mat[i+1][j+1] &&'J' == mat[i+2][j+2] && ia_joue==0){
+              if (i+3==N && mat[i+3][j+3] == ' ' ){
+                  inserer(j+3,statut(j+3,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+              else if(i+3<N && mat[i+4][j+3] != ' ' && mat[i+3][j+3] == ' '){
+                inserer(j+3,statut(j+3,mat),ia,mat);
+                ia_joue=1;
+                break;
+              }
+              else if (mat[i-1][j-1] == ' ' && mat[i][j-1] !=' '){
+                  inserer(j-1,statut(j-1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+              }
+          }
+      }
+  }
+
+  for(j=1;j!=N-1;j++){
+      for(i=N-1;i>=1;i--){
+          //TEST 2eme Diagonnale
+          if('J' == mat[i][j] &&'J' == mat[i-1][j+1] &&'J' == mat[i-2][j+2]&& ia_joue==0){
+            if (mat[i-3][j+3] == ' ' && mat[i-2][j+3] !=' '){
+                inserer(j+3,statut(j+3,mat),ia,mat);
+                ia_joue=1;
+                break;
+            }
+            else if ((i+1)==N && mat[i+1][j-1] == ' '){
+                inserer(j-1,statut(j-1,mat),ia,mat);
+                ia_joue=1;
+                break;
+            }
+            else if ((i+1)<N && mat[i+1][j-1] == ' '&&mat[i+2][j-1] != ' ' ){
+                inserer(j-1,statut(j-1,mat),ia,mat);
+                ia_joue=1;
+                break;
+            }
+          }
+
+      }
+  }
+
+
+  /*Ia+*/
+  //Attaque si 2 jetons egaux
+  for(i=1;i<=N-1;i++){
+      for(j=1;j<=N-1;j++){
+          //TEST ligne (2 jetons)
+          if('R' == mat[i][j] && 'R' == mat[i][j+1] && ia_joue==0){
+              if (mat[i][j+2] == ' '){
+                  if(i==N ){
+                    inserer(j+2,statut(j+2,mat),ia, mat);
+                    ia_joue=1;
+                    break;
+                  }
+                  else if(i<N && mat[i+1][j+2] != ' ' ){
+                    inserer(j+2,statut(j+2,mat),ia, mat);
+                    ia_joue=1;
+                    break;
+                  }
+              }
+              if (mat[i][j-1] == ' '){
+                  if(i==N ){
+                    inserer(j-1,statut(j-1,mat),ia, mat);
+                    ia_joue=1;
+                    break;
+                  }
+                  else if(i<N && mat[i+1][j-1] != ' ' ){
+                    inserer(j-1,statut(j-1,mat),ia, mat);
+                    ia_joue=1;
+                    break;
+                  }
+              }
+          }
+
+          //TEST LIGNE
+          //2 jetons
+          else if('R' == mat[i][j] && 'R' == mat[i-1][j] && mat[i-2][j] == ' ' && ia_joue==0){
+              inserer(j,statut(j,mat),ia,mat);
+              ia_joue=1;
+              break;
+          }
+      }
+  }
+  //Attaque si 1 jetons
+   for(i=1;i!=N-1;i++){
+      for(j=1;j!=N-1;j++){
+
+          if('R' == mat[i][j] && ia_joue==0){
+            //TEST ligne et colone (1 jetons)
+              if (i==N){
+                if(mat[i][j+1]){
+                  inserer(j+1,statut(j+1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                }
+                else if(mat[i][j-1]){
+                  inserer(j-1,statut(j-1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                }
+                else if(mat[i-1][j]==' '){
+                  inserer(j,statut(j,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                }
+              }
+              else if(i<N){
+                if(mat[i][j+1] && mat[i-1][j+1]){
+                  inserer(j+1,statut(j+1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                }
+                else if(mat[i][j-1] && mat[i-1][j-1]){
+                  inserer(j-1,statut(j-1,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                }
+                else if(mat[i-1][j]==' '){
+                  inserer(j,statut(j,mat),ia,mat);
+                  ia_joue=1;
+                  break;
+                }
+              }
+
+
+          }
+
+
+
+
+      }
+  }
+
+ /* Si l'ia ne sais pas quoi jouer random*/
+
+
+ if(ia_joue==0){
+      coul=ia.couleur;
+      y=rand()%6+1;
+
+      inserer(y,statut(y,mat),ia,mat);
+      ia_joue=1;
+      }
+
+
+
+
+
+
+/*  int y=0 ,x=-1;
   const int MAX = (p+1) , MIN = (p-1) ;
 
 // Génération du nombre aléatoire
@@ -1524,7 +1800,7 @@ while (x==-1) {
   else if (ia.couleur=="jaune") {
     mat[x][y]='J';
   }
-
+*/
 }
 
 
