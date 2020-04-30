@@ -10,7 +10,7 @@
 
 * \file 1vIA.c
 * \brief Programme regroupant les fonctions du mode 1vIA du jeu du puissance 4++
-* \author Aaron Amani Oussama Belkadi Fathi et Paul riga
+* \author Aaron Amani Oussama Belkadi Fatih Ufacik et Paul riga
 * \version 1.0
 * \date 17 fevrier 2020
 
