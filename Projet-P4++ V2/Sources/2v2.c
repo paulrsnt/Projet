@@ -297,7 +297,7 @@ extern int JouerNormal2v2(char mat[N][M],char mat2[N][M], joueur *j1, joueur *j2
 
       int x=statut2v2(y,mat,pc);
       inserer2v2(y,statut2v2(y,mat2,pc),j2,mat,mat2,pc);                          //on insere la int
-      rouge=parcours(x,y,mat,j2);
+      jaune=parcours(x,y,mat,j2);
 
       if (grille_plein2v2(mat)) {
         printf("LA GRILLE EST PLEINE : MATCH NULL \n");
@@ -389,7 +389,7 @@ extern int JouerNormal2v2(char mat[N][M],char mat2[N][M], joueur *j1, joueur *j2
 
         int x=statut2v2(y,mat,pc);
         inserer2v2(y,statut2v2(y,mat2,pc),j4,mat,mat2,pc);                          //on insere la int
-        rouge=parcours(x,y,mat,j4);
+        jaune=parcours(x,y,mat,j4);
 
         if (grille_plein2v2(mat)) {
           printf("LA GRILLE EST PLEINE : MATCH NULL \n");
