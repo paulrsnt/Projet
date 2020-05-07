@@ -102,8 +102,59 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
                 break;
               }
             }
+          }
 
+          else if(mat[i][j] == 'J' && mat[i][j+2] == 'J' && mat[i][j+3] == 'J' && ia_joue==0){
+              if(i==6){
+                if ((mat[i][j+1] == ' ')){
 
+                  ia->x=j+1;
+                  ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                    insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+                    ia_joue=1;
+                    break;
+                }
+              }
+
+              else if(i<6){
+                if((mat[i][j+1] == ' ') && (mat[i-1][j+1] != ' ')){
+
+                  ia->x=j+1;
+                  ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                  insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+                  ia_joue=1;
+                  break;
+                }
+              }
+
+          }
+
+          else if(mat[i][j] == 'J' && mat[i][j+1] == 'J' && mat[i][j+3] == 'J' && ia_joue==0){
+              if(i==6){
+                if ((mat[i][j+2] == ' ')){
+
+                  ia->x=j+2;
+                  ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                    insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                    ia_joue=1;
+                    break;
+                }
+              }
+
+              else if(i<6){
+                if((mat[i][j+2] == ' ') && (mat[i-1][j+2] != ' ')){
+
+                  ia->x=j+2;
+                  ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                  insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                  ia_joue=1;
+                  break;
+                }
+              }
 
           }
 
@@ -152,6 +203,30 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
             }
 
           }
+
+          else if(mat[i][j] == 'J' && mat[i+1][j+1] == 'J' && mat[i+3][j+3] == 'J' && ia_joue==0){
+            if(mat[i+3][j+2] != ' ' && mat[i+2][j+2] == ' '){
+
+              ia->x=j+2;
+              ia->y=statut(j+2,mat); if(ia->y==0){break;}
+              insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+              ia_joue=1;
+              break;
+            }
+          }
+
+          else if(mat[i][j] == 'J' && mat[i+2][j+2] == 'J' && mat[i+3][j+3] == 'J' && ia_joue==0){
+            if(mat[i+2][j+1] != ' ' && mat[i+1][j+1] == ' '){
+
+              ia->x=j+1;
+              ia->y=statut(j+1,mat); if(ia->y==0){break;}
+              insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+              ia_joue=1;
+              break;
+            }
+          }
       }
   }
 
@@ -187,6 +262,32 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
                   ia_joue=1;
                   break;
               }
+          }
+
+          else if(mat[i][j] == 'J' && mat[i-1][j+1] == 'J' && mat[i-3][j+3] == 'J' && ia_joue==0){
+              if (mat[i-2][j+2] == ' ' && mat[i-1][j+2] !=' '){
+
+                ia->x=j+2;
+                ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                  insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                  ia_joue=1;
+                  break;
+              }
+
+          }
+
+          else if(mat[i][j] == 'J' && mat[i-2][j+2] == 'J' && mat[i-3][j+3] == 'J' && ia_joue==0){
+              if (mat[i-1][j+1] == ' ' && mat[i][j+1] !=' '){
+
+                ia->x=j+1;
+                ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                  insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+                  ia_joue=1;
+                  break;
+              }
+
           }
 
       }
@@ -240,6 +341,60 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
             }
           }
 
+          else if(mat[i][j] == 'R' && mat[i][j+1] == 'R' &&mat[i][j+3]== 'R' && ia_joue==0){
+            if (i==6){
+              if(mat[i][j+2] == ' '){
+
+                ia->x=j+2;
+                ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                ia_joue=1;
+                break;
+              }
+            }
+
+            else if (i<6){
+              if((mat[i][j+2] == ' ') && (mat[i-1][j+2] != ' ')){
+
+
+                ia->x=j+2;
+                ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                  insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                  ia_joue=1;
+                  break;
+            }
+            }
+          }
+
+          else if(mat[i][j] == 'R' && mat[i][j+2] == 'R' &&mat[i][j+3]== 'R' && ia_joue==0){
+            if (i==6){
+              if(mat[i][j+1] == ' '){
+
+                ia->x=j+1;
+                ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+                ia_joue=1;
+                break;
+              }
+            }
+
+            else if (i<6){
+              if((mat[i][j+1] == ' ') && (mat[i-1][j+1] != ' ')){
+
+
+                ia->x=j+1;
+                ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                  insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+                  ia_joue=1;
+                  break;
+            }
+            }
+          }
+
           //TEST colonne
           //'R'3 jetons
           else if(mat[i][j] == 'R' && mat[i+1][j] == 'R' && mat[i+2][j] == 'R' && ia_joue==0){
@@ -285,6 +440,32 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
                   break;
               }
           }
+
+          else if(mat[i][j] == 'R' && mat[i+1][j+1] == 'R' && mat[i+3][j+3] == 'R' && ia_joue==0){
+
+              if(mat[i+3][j+2] != ' ' && mat[i+2][j+2] == ' '){
+
+                ia->x=j+2;
+                ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                ia_joue=1;
+                break;
+              }
+          }
+
+          else if(mat[i][j] == 'R' && mat[i+2][j+2] == 'R' && mat[i+3][j+3] == 'R' && ia_joue==0){
+
+              if(mat[i+2][j+1] != ' ' && mat[i+1][j+1] == ' '){
+
+                ia->x=j+1;
+                ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
+
+                ia_joue=1;
+                break;
+              }
+          }
       }
   }
 
@@ -315,6 +496,32 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
               ia->x=j-1;
               ia->y=statut(j-1,mat); if(ia->y==0){break;}
                 insererMode1vsIA(j-1,statut(j-1,mat),ia,mat);
+
+                ia_joue=1;
+                break;
+            }
+          }
+
+          if(mat[i][j] == 'R' && mat[i-1][j+1] == 'R' && mat[i-3][j+3] == 'R' && ia_joue==0){
+
+            if (mat[i-2][j+2] == ' '&& mat[i-1][j+2] != ' ' ){
+
+              ia->x=j+2;
+              ia->y=statut(j+2,mat); if(ia->y==0){break;}
+                insererMode1vsIA(j+2,statut(j+2,mat),ia,mat);
+
+                ia_joue=1;
+                break;
+            }
+          }
+
+          if(mat[i][j] == 'R' && mat[i-2][j+2] == 'R' && mat[i-3][j+3] == 'R' && ia_joue==0){
+
+            if (mat[i-1][j+1] == ' '&& mat[i][j+1] != ' ' ){
+
+              ia->x=j+1;
+              ia->y=statut(j+1,mat); if(ia->y==0){break;}
+                insererMode1vsIA(j+1,statut(j+1,mat),ia,mat);
 
                 ia_joue=1;
                 break;
