@@ -531,26 +531,6 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]){
 
 
 
-
-
-
-/*  int y=0 ,x=-1;
-  const int MAX = (p+1) , MIN = (p-1) ;
-// Génération du nombre aléatoire
-while (x==-1) {
-  do {
-    srand(time(NULL));
-    y = (rand() % (MAX - MIN ) + MIN);
-  } while(y<0||y>6);
-  x = statut(y,mat);
-}
-  if (ia.couleur=='J') {
-    mat[x][y]='J';
-  }
-  else if (ia.couleur=='R') {
-    mat[x][y]='R';
-  }
-*/
 }
 
 
