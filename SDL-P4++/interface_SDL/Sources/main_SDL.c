@@ -55,7 +55,7 @@ do {
         fprintf(stderr, "Erreur à l'initailisation de l'audio\n");
         exit(EXIT_FAILURE);
     }
-
+    /*la musique se charge*/
     music = Mix_LoadMUS("./music_menu/puissance4.ogg");
     if(music == NULL){
         fprintf(stderr, "Erreur du chargement de l'audio : %s\n", Mix_GetError());
