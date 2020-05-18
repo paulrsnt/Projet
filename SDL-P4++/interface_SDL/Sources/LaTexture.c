@@ -62,6 +62,6 @@ SDL_Texture *tex_text(char* font,int taille, char* text, SDL_Color color){
     }
 
     SDL_FreeSurface(texte); /* on a obtenue la texture, et on a plus besoin du texte */
-    TTF_CloseFont(policeTitre); /* Doit se faire avant TTF_Quit() */
+    TTF_CloseFont(policeTitre); 
     return texte_tex;
 }
