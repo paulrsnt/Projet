@@ -29,7 +29,7 @@ void insererMode1vsIA(int y, int x, joueur *t, char mat[N][M]);
 
 /**
  * \fn void insererIA(joueur t, char mat[N][M])
- * \brief fonction qui permet a l'utilisateur d'inserer une piece
+ * \brief fonction qui permet a l'IA d'inserer une piece
  *
  * \param ia structure representant le joueur
  * \param mat la grille du jeu.
