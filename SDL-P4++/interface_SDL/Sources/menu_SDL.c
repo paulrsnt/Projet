@@ -26,9 +26,9 @@
  }
 
  /**
- * \brief fonction qui permet de configurer SDL_Rect (la zone selectionner) et la position de l'objet
+ * \brief fonction qui permet de configurer la SDL_Rect (la zone selectionner) et la position de l'élément
  * \param SDL_Rect r : parametre pour la zone selectionne
- * \param SDL_Texture* t : parametre pour la texture SDL
+ * \param SDL_Texture* t : parametre pour la texture de l'interface graphique (SDL)
  * \param int x : position de x
  * \param int y : position de y
   * \author Oussama Belkadi Fatih Ufacik Paul Riga
@@ -43,12 +43,13 @@ int position(SDL_Rect* r, SDL_Texture* t, int x, int y){
 /**
  * \fn int menu_SDL(void)
  * \brief Fonction qui permet d'afficher le menu avec l'interface graphique SDL et la lecture d'une musique et quitter le jeu.
- * \param void : rien
+ * \param void : elle retourne rien 
  * \return entier
  */
 int menu_SDL(void){
     int x,y, i=0, j=0;
     SDL_Rect txtDestRect,txtMenuRect[4], imgBtnRect, imgBGRect, musicRect;
+ 
     // Une variable de couleur Blanche
     SDL_Color couleurBlanc = {255, 255, 255, 255};
 
@@ -60,29 +61,29 @@ int menu_SDL(void){
     texteMenu_tex[2] = tex_text("./ttf_police/PoliceMenu.ttf",40,"1 vs IA",couleurBlanc);
     texteMenu_tex[3] = tex_text("./ttf_police/PoliceMenu.ttf",40,"Quitter",couleurBlanc);
 
-    //Position ou seront mis les textes dans la fenêtre
-    //TITRE
+    //position (emplacement) du titre
     position(&txtDestRect, texte_tex, 300, 10);
 
-    //MENU
+    //position (emplacement) du menu 
     for(j=0;j<4;j++){
         position(&txtMenuRect[j], texteMenu_tex[j], j==2 || j==3 ? 480 : 500, 165+90*j);
     }
 
-    //Chargement de l'image de fond
+    //chargement de l'image de fond
     SDL_Texture *image_BG_tex = tex_img_png("./image/red.png");
-    //Chargement de l'image bouton
+    //chargement de l'image bouton
     SDL_Texture *image_btn_tex = tex_img_png("./image/boutton_principale.png");
-    //Chargement de l'image bouton (utilisé quand la souris passe sur l'image)
+    //chargement de l'image bouton par dessus (utilisé quand la souris passe sur l'image)
     SDL_Texture *image_btnHover_tex = tex_img_png("./image/boutton_dessus.png");
-    //IMAGE PLAY
+    //image pour l'image play et pause
     SDL_Texture *image_play_tex = tex_img_png("./image/play_pause.png");
-    //IMAGE PAUSE
+    //image play et pause
     SDL_Texture *image_pause_tex = tex_img_png("./image/play_pause.png");
 
     SDL_Texture *temp;
     SDL_Texture *temp_music = image_play_tex;
-    //Musique
+ 
+    //position (emplacement) pour la musique
     position(&musicRect, temp_music, 1000, 570);
 
         int running = 1;
@@ -127,14 +128,14 @@ int menu_SDL(void){
 
                         SDL_RenderCopy(renderer, temp_music, NULL, &musicRect);
 
-                        //On positionne le premier bouton
+                        //On positionne le premier bouton du,menu
                         imgBtnRect.x = 440;
                         imgBtnRect.y = 150;
                         SDL_QueryTexture(image_btnHover_tex, NULL, NULL, &(imgBtnRect.w), &(imgBtnRect.h));
                         for(i=0;i<4;i++){
                             if( pointe_souris(imgBtnRect,x,y) ){
                                 temp = image_btnHover_tex;
-                        				 if(e.type == SDL_MOUSEBUTTONDOWN){	//clique sur un bouton
+                        				 if(e.type == SDL_MOUSEBUTTONDOWN){	 //lorque l'on clique sur un bouton
                         					effacer();
                         					return i;
                         				}
