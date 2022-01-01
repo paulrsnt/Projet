@@ -9,3 +9,5 @@ Puissance 4++
 
 -but: Aligner 4 pièces en lignes ou en diagonales ou en colonnes en premier contre son adversaire
 
+Membres du projet :
+Aaron Amani, Oussama Belkadi, Fatih Ufacık, et Paul riga
